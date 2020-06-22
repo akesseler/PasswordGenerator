@@ -1,0 +1,68 @@
+﻿/*
+ * MIT License
+ * 
+ * Copyright (c) 2020 plexdata.de
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+using NUnit.Framework;
+using Plexdata.Utilities.Password.Calculators;
+using Plexdata.Utilities.Password.Factories;
+using Plexdata.Utilities.Password.Interfaces;
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Plexdata.Utilities.Password.Tests.Factories
+{
+    [Category("UnitTest")]
+    [ExcludeFromCodeCoverage]
+    public class CalculatorFactoryTests
+    {
+        [Test]
+        public void Create_TypeOfIEntropyCalculator_ResultIsInstanceOfEntropyCalculator()
+        {
+            Object actual = CalculatorFactory.Create<IEntropyCalculator>();
+
+            Assert.That(actual, Is.InstanceOf<EntropyCalculator>());
+        }
+
+        [Test]
+        public void Create_TypeOfIStrengthCalculator_ResultIsInstanceOfStrengthCalculator()
+        {
+            Object actual = CalculatorFactory.Create<IStrengthCalculator>();
+
+            Assert.That(actual, Is.InstanceOf<StrengthCalculator>());
+        }
+
+        [Test]
+        public void Create_TypeOfISecurityCalculator_ResultIsInstanceOfSecurityCalculator()
+        {
+            Object actual = CalculatorFactory.Create<ISecurityCalculator>();
+
+            Assert.That(actual, Is.InstanceOf<SecurityCalculator>());
+        }
+
+        [Test]
+        public void Create_TypeOfIDisposable_ThrowsNotSupportedException()
+        {
+            Assert.That(() => CalculatorFactory.Create<IDisposable>(), Throws.InstanceOf<NotSupportedException>());
+        }
+    }
+}
