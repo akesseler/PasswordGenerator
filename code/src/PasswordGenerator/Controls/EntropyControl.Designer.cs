@@ -55,10 +55,10 @@ namespace Plexdata.PasswordGenerator.Controls
             this.group1 = new System.Windows.Forms.GroupBox();
             this.txtSummary = new System.Windows.Forms.Label();
             this.txtEntropy = new System.Windows.Forms.Label();
-            this.prgStrength = new Plexdata.PasswordGenerator.Controls.StrengthPanel();
             this.lblEntropy = new System.Windows.Forms.Label();
             this.lblSummary = new System.Windows.Forms.Label();
             this.lblStrength = new System.Windows.Forms.Label();
+            this.prgStrength = new Plexdata.PasswordGenerator.Controls.StrengthPanel();
             this.group1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +78,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.group1.Margin = new System.Windows.Forms.Padding(0);
             this.group1.Name = "group1";
             this.group1.Padding = new System.Windows.Forms.Padding(5);
-            this.group1.Size = new System.Drawing.Size(444, 124);
+            this.group1.Size = new System.Drawing.Size(450, 144);
             this.group1.TabIndex = 0;
             this.group1.TabStop = false;
             this.group1.Text = "Calculated Password Entropy";
@@ -91,7 +91,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.txtSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSummary.Location = new System.Drawing.Point(80, 78);
             this.txtSummary.Name = "txtSummary";
-            this.txtSummary.Size = new System.Drawing.Size(356, 40);
+            this.txtSummary.Size = new System.Drawing.Size(362, 60);
             this.txtSummary.TabIndex = 9;
             this.txtSummary.Text = "???";
             // 
@@ -103,25 +103,10 @@ namespace Plexdata.PasswordGenerator.Controls
             this.txtEntropy.Location = new System.Drawing.Point(80, 25);
             this.txtEntropy.Margin = new System.Windows.Forms.Padding(3);
             this.txtEntropy.Name = "txtEntropy";
-            this.txtEntropy.Size = new System.Drawing.Size(356, 23);
+            this.txtEntropy.Size = new System.Drawing.Size(362, 23);
             this.txtEntropy.TabIndex = 8;
             this.txtEntropy.Text = "???";
             this.txtEntropy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // prgStrength
-            // 
-            this.prgStrength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgStrength.BackColor = System.Drawing.Color.Transparent;
-            this.prgStrength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.prgStrength.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.prgStrength.Label = "";
-            this.prgStrength.Location = new System.Drawing.Point(80, 51);
-            this.prgStrength.Name = "prgStrength";
-            this.prgStrength.Padding = new System.Windows.Forms.Padding(1);
-            this.prgStrength.Size = new System.Drawing.Size(356, 23);
-            this.prgStrength.TabIndex = 7;
-            this.prgStrength.Value = 0;
             // 
             // lblEntropy
             // 
@@ -150,6 +135,22 @@ namespace Plexdata.PasswordGenerator.Controls
             this.lblStrength.TabIndex = 6;
             this.lblStrength.Text = "Strength:";
             // 
+            // prgStrength
+            // 
+            this.prgStrength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prgStrength.BackColor = System.Drawing.Color.Transparent;
+            this.prgStrength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.prgStrength.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.prgStrength.Label = "";
+            this.prgStrength.Location = new System.Drawing.Point(80, 51);
+            this.prgStrength.Name = "prgStrength";
+            this.prgStrength.Padding = new System.Windows.Forms.Padding(1);
+            this.prgStrength.Percent = 0D;
+            this.prgStrength.Size = new System.Drawing.Size(362, 23);
+            this.prgStrength.TabIndex = 7;
+            this.prgStrength.Value = 0;
+            // 
             // EntropyControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,7 +159,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.Controls.Add(this.group1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "EntropyControl";
-            this.Size = new System.Drawing.Size(450, 130);
+            this.Size = new System.Drawing.Size(450, 150);
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
             this.ResumeLayout(false);

@@ -105,13 +105,13 @@ namespace Plexdata.PasswordGenerator
         protected override void OnMove(EventArgs args)
         {
             base.OnMove(args);
-            this.settings.MainWindow.ApplyLocation(this);
+            this.settings?.MainWindow.ApplyLocation(this);
         }
 
         protected override void OnResizeEnd(EventArgs args)
         {
             base.OnResizeEnd(args);
-            this.settings.MainWindow.ApplyDimension(this);
+            this.settings?.MainWindow.ApplyDimension(this);
         }
 
         #endregion

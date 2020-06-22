@@ -54,28 +54,28 @@ namespace Plexdata.PasswordGenerator
         {
             this.components = new System.ComponentModel.Container();
             this.tbsMain = new System.Windows.Forms.ToolStrip();
+            this.tbbExit = new System.Windows.Forms.ToolStripButton();
             this.tssMain1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tbbSave = new System.Windows.Forms.ToolStripButton();
+            this.tbbPlay = new System.Windows.Forms.ToolStripButton();
             this.tssMain2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tbbSettings = new System.Windows.Forms.ToolStripButton();
+            this.tbbInfo = new System.Windows.Forms.ToolStripButton();
             this.tipMain = new System.Windows.Forms.ToolTip(this.components);
             this.sbsMain = new System.Windows.Forms.StatusStrip();
             this.tssLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssValue = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tbbExit = new System.Windows.Forms.ToolStripButton();
-            this.tbbSave = new System.Windows.Forms.ToolStripButton();
-            this.tbbPlay = new System.Windows.Forms.ToolStripButton();
-            this.tbbSettings = new System.Windows.Forms.ToolStripButton();
-            this.tbbInfo = new System.Windows.Forms.ToolStripButton();
             this.tvcContent = new Plexdata.PasswordGenerator.Controls.TabViewControl();
             this.tbpCommon = new System.Windows.Forms.TabPage();
             this.gusCommon = new Plexdata.PasswordGenerator.Controls.CommonGeneratorControl();
             this.tbpQwerty = new System.Windows.Forms.TabPage();
+            this.gusQwerty = new Plexdata.PasswordGenerator.Controls.QwertyGeneratorControl();
             this.tbpExtended = new System.Windows.Forms.TabPage();
             this.gusExtended = new Plexdata.PasswordGenerator.Controls.ExtendedGeneratorControl();
             this.tbpExchange = new System.Windows.Forms.TabPage();
             this.gusExchange = new Plexdata.PasswordGenerator.Controls.ExchangeGeneratorControl();
             this.tbpSecurity = new System.Windows.Forms.TabPage();
             this.gusSecurity = new Plexdata.PasswordGenerator.Controls.SecurityGeneratorControl();
-            this.gusQwerty = new Plexdata.PasswordGenerator.Controls.QwertyGeneratorControl();
             this.tbsMain.SuspendLayout();
             this.sbsMain.SuspendLayout();
             this.tvcContent.SuspendLayout();
@@ -104,40 +104,6 @@ namespace Plexdata.PasswordGenerator
             this.tbsMain.Size = new System.Drawing.Size(582, 41);
             this.tbsMain.TabIndex = 0;
             // 
-            // tssMain1
-            // 
-            this.tssMain1.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tssMain1.Name = "tssMain1";
-            this.tssMain1.Size = new System.Drawing.Size(6, 35);
-            // 
-            // tssMain2
-            // 
-            this.tssMain2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tssMain2.Name = "tssMain2";
-            this.tssMain2.Size = new System.Drawing.Size(6, 35);
-            // 
-            // sbsMain
-            // 
-            this.sbsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tssLabel,
-            this.tssValue});
-            this.sbsMain.Location = new System.Drawing.Point(0, 474);
-            this.sbsMain.Name = "sbsMain";
-            this.sbsMain.Size = new System.Drawing.Size(582, 22);
-            this.sbsMain.TabIndex = 3;
-            // 
-            // tssLabel
-            // 
-            this.tssLabel.Name = "tssLabel";
-            this.tssLabel.Size = new System.Drawing.Size(22, 17);
-            this.tssLabel.Text = "???";
-            // 
-            // tssValue
-            // 
-            this.tssValue.Name = "tssValue";
-            this.tssValue.Size = new System.Drawing.Size(22, 17);
-            this.tssValue.Text = "???";
-            // 
             // tbbExit
             // 
             this.tbbExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -149,6 +115,12 @@ namespace Plexdata.PasswordGenerator
             this.tbbExit.Text = "Exit";
             this.tbbExit.ToolTipText = "Close window and exit program.";
             this.tbbExit.Click += new System.EventHandler(this.OnExitButtonClick);
+            // 
+            // tssMain1
+            // 
+            this.tssMain1.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.tssMain1.Name = "tssMain1";
+            this.tssMain1.Size = new System.Drawing.Size(6, 35);
             // 
             // tbbSave
             // 
@@ -174,6 +146,12 @@ namespace Plexdata.PasswordGenerator
             this.tbbPlay.ToolTipText = "Run generator with current settings.";
             this.tbbPlay.Click += new System.EventHandler(this.OnPlayButtonClick);
             // 
+            // tssMain2
+            // 
+            this.tssMain2.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.tssMain2.Name = "tssMain2";
+            this.tssMain2.Size = new System.Drawing.Size(6, 35);
+            // 
             // tbbSettings
             // 
             this.tbbSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -197,6 +175,28 @@ namespace Plexdata.PasswordGenerator
             this.tbbInfo.Text = "Info";
             this.tbbInfo.ToolTipText = "Show info box with some program details.";
             this.tbbInfo.Click += new System.EventHandler(this.OnInfoButtonClick);
+            // 
+            // sbsMain
+            // 
+            this.sbsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tssLabel,
+            this.tssValue});
+            this.sbsMain.Location = new System.Drawing.Point(0, 474);
+            this.sbsMain.Name = "sbsMain";
+            this.sbsMain.Size = new System.Drawing.Size(582, 22);
+            this.sbsMain.TabIndex = 3;
+            // 
+            // tssLabel
+            // 
+            this.tssLabel.Name = "tssLabel";
+            this.tssLabel.Size = new System.Drawing.Size(22, 17);
+            this.tssLabel.Text = "???";
+            // 
+            // tssValue
+            // 
+            this.tssValue.Name = "tssValue";
+            this.tssValue.Size = new System.Drawing.Size(22, 17);
+            this.tssValue.Text = "???";
             // 
             // tvcContent
             // 
@@ -246,6 +246,16 @@ namespace Plexdata.PasswordGenerator
             this.tbpQwerty.TabIndex = 4;
             this.tbpQwerty.Text = "Qwerty";
             this.tbpQwerty.UseVisualStyleBackColor = true;
+            // 
+            // gusQwerty
+            // 
+            this.gusQwerty.BackColor = System.Drawing.Color.Transparent;
+            this.gusQwerty.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gusQwerty.Location = new System.Drawing.Point(5, 5);
+            this.gusQwerty.Margin = new System.Windows.Forms.Padding(0);
+            this.gusQwerty.Name = "gusQwerty";
+            this.gusQwerty.Size = new System.Drawing.Size(182, 64);
+            this.gusQwerty.TabIndex = 0;
             // 
             // tbpExtended
             // 
@@ -310,18 +320,8 @@ namespace Plexdata.PasswordGenerator
             this.gusSecurity.Location = new System.Drawing.Point(5, 5);
             this.gusSecurity.Margin = new System.Windows.Forms.Padding(0);
             this.gusSecurity.Name = "gusSecurity";
-            this.gusSecurity.Size = new System.Drawing.Size(182, 64);
+            this.gusSecurity.Size = new System.Drawing.Size(564, 397);
             this.gusSecurity.TabIndex = 0;
-            // 
-            // gusQwerty
-            // 
-            this.gusQwerty.BackColor = System.Drawing.Color.Transparent;
-            this.gusQwerty.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gusQwerty.Location = new System.Drawing.Point(5, 5);
-            this.gusQwerty.Margin = new System.Windows.Forms.Padding(0);
-            this.gusQwerty.Name = "gusQwerty";
-            this.gusQwerty.Size = new System.Drawing.Size(564, 397);
-            this.gusQwerty.TabIndex = 0;
             // 
             // MainWindow
             // 
