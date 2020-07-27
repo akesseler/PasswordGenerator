@@ -22,33 +22,24 @@
  * SOFTWARE.
  */
 
-using Plexdata.PasswordGenerator.Models;
 using System;
-using System.Drawing;
 
-namespace Plexdata.PasswordGenerator.Extensions
+namespace Plexdata.PasswordGenerator.Events
 {
-    public static class DimensionExtension
+    public delegate void ShowSettingsEventHandler(Object sender, ShowSettingsEventArgs args);
+
+    public class ShowSettingsEventArgs : EventArgs
     {
-        public static Size ToSize(this Dimension value)
-        {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+        public const String ExtendedSettings = "Extended";
+        public const String ExchangeSettings = "Exchange";
+        public const String SecuritySettings = "Security";
 
-            return new Size(value.Width, value.Height);
+        public ShowSettingsEventArgs(String settings)
+            : base()
+        {
+            this.Settings = (settings ?? String.Empty).Trim();
         }
 
-        public static void FromSize(this Dimension value, Size size)
-        {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            value.Width = size.Width;
-            value.Height = size.Height;
-        }
+        public String Settings { get; private set; }
     }
 }

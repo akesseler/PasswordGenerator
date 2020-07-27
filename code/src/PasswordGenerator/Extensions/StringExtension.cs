@@ -22,33 +22,43 @@
  * SOFTWARE.
  */
 
-using Plexdata.PasswordGenerator.Models;
 using System;
-using System.Drawing;
+using System.Linq;
 
 namespace Plexdata.PasswordGenerator.Extensions
 {
-    public static class DimensionExtension
+    public static class StringExtension
     {
-        public static Size ToSize(this Dimension value)
+        public static String ClearLineEndings(this String source)
         {
-            if (value is null)
+            String result = source ?? String.Empty;
+
+            foreach (String current in Environment.NewLine.ToCharArray().Select(x => x.ToString()))
             {
-                throw new ArgumentNullException(nameof(value));
+                result = result.Replace(current, String.Empty);
             }
 
-            return new Size(value.Width, value.Height);
+            return result;
         }
 
-        public static void FromSize(this Dimension value, Size size)
+        public static String Repeat(this String source, Int32 count, String separator = null)
         {
-            if (value is null)
+            if (source == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                return String.Empty;
             }
 
-            value.Width = size.Width;
-            value.Height = size.Height;
+            if (count < 0)
+            {
+                count = 0;
+            }
+
+            if (separator == null)
+            {
+                separator = String.Empty;
+            }
+
+            return String.Join(separator, Enumerable.Repeat(source, count));
         }
     }
 }

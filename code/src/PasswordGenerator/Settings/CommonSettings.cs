@@ -34,6 +34,7 @@ namespace Plexdata.PasswordGenerator.Settings
         private CommonType type;
         private Int32 amount;
         private Int32 length;
+        private String phrase;
         private Boolean uppers;
         private Boolean lowers;
         private Boolean digits;
@@ -45,6 +46,7 @@ namespace Plexdata.PasswordGenerator.Settings
             this.Type = CommonType.InternetPassword2;
             this.Amount = 5;
             this.Length = 0;
+            this.Phrase = null;
             this.IsUppers = true;
             this.IsLowers = true;
             this.IsDigits = true;
@@ -98,6 +100,23 @@ namespace Plexdata.PasswordGenerator.Settings
                 {
                     this.length = value;
                     base.RaisePropertyChanged(nameof(this.Length));
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public String Phrase
+        {
+            get
+            {
+                return this.phrase;
+            }
+            set
+            {
+                if (this.phrase != value)
+                {
+                    this.phrase = value ?? String.Empty;
+                    base.RaisePropertyChanged(nameof(this.Phrase));
                 }
             }
         }

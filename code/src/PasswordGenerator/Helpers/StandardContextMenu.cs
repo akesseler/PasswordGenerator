@@ -126,7 +126,6 @@ namespace Plexdata.PasswordGenerator.Helpers
                 result = new StandardContextMenu(container);
             }
 
-
             ToolStripItem current = null;
 
             current = new ToolStripMenuItem(StandardContextMenu.MenuCopy);
@@ -150,8 +149,6 @@ namespace Plexdata.PasswordGenerator.Helpers
             current.Name = current.Text;
             if (click != null) { current.Click += click; }
             result.Items.Add(current);
-
-
 
             return result;
         }

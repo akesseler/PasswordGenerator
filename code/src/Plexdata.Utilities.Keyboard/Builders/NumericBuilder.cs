@@ -116,7 +116,7 @@ namespace Plexdata.Utilities.Keyboard.Builders
 
             KeyPad results = KeyPad.Create(matrix);
 
-            // TODO: this.DumpResults(results);
+            this.DumpResults(results);
 
             return results;
         }

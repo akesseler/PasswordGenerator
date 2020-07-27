@@ -111,7 +111,7 @@ namespace Plexdata.Utilities.Keyboard.Builders
 
             results = results.Where(x => !String.IsNullOrWhiteSpace(x)).Distinct().ToList();
 
-            // TODO: this.DumpResults(results);
+            this.DumpResults(results);
 
             return results;
         }

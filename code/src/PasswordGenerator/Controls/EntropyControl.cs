@@ -32,15 +32,11 @@ namespace Plexdata.PasswordGenerator.Controls
     {
         private Double entropy = 0d;
         private Strength strength = Strength.Unknown;
-        private String summary = null;
 
         public EntropyControl()
         {
             this.InitializeComponent();
-
-            this.Entropy = 0d;
-            this.Strength = Strength.Unknown;
-            this.Summary = String.Empty;
+            this.Reset();
         }
 
         public Double Entropy
@@ -57,7 +53,7 @@ namespace Plexdata.PasswordGenerator.Controls
                 }
 
                 this.entropy = value;
-                this.txtEntropy.Text = $"{Math.Truncate(this.entropy).ToString("N0")} Bits";
+                this.txtEntropy.Text = $"{Math.Truncate(this.entropy):N0} Bits";
             }
         }
 
@@ -83,7 +79,7 @@ namespace Plexdata.PasswordGenerator.Controls
             {
                 this.strength = value;
 
-                switch (strength)
+                switch (this.strength)
                 {
                     case Strength.VeryWeak:
                         this.prgStrength.Value = 20;
@@ -117,7 +113,7 @@ namespace Plexdata.PasswordGenerator.Controls
         {
             get
             {
-                return this.summary;
+                return this.txtSummary.Text;
             }
             set
             {
@@ -125,6 +121,14 @@ namespace Plexdata.PasswordGenerator.Controls
 
                 this.txtSummary.Text = value;
             }
+        }
+
+        public void Reset()
+        {
+            this.Entropy = 0d;
+            this.Percent = 0d;
+            this.Strength = Strength.Unknown;
+            this.Summary = String.Empty;
         }
     }
 }

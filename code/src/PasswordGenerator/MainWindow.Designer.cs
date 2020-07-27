@@ -202,8 +202,8 @@ namespace Plexdata.PasswordGenerator
             // 
             this.tvcContent.Controls.Add(this.tbpCommon);
             this.tvcContent.Controls.Add(this.tbpQwerty);
-            this.tvcContent.Controls.Add(this.tbpExtended);
             this.tvcContent.Controls.Add(this.tbpExchange);
+            this.tvcContent.Controls.Add(this.tbpExtended);
             this.tvcContent.Controls.Add(this.tbpSecurity);
             this.tvcContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvcContent.Location = new System.Drawing.Point(0, 41);
@@ -254,7 +254,7 @@ namespace Plexdata.PasswordGenerator
             this.gusQwerty.Location = new System.Drawing.Point(5, 5);
             this.gusQwerty.Margin = new System.Windows.Forms.Padding(0);
             this.gusQwerty.Name = "gusQwerty";
-            this.gusQwerty.Size = new System.Drawing.Size(182, 64);
+            this.gusQwerty.Size = new System.Drawing.Size(564, 397);
             this.gusQwerty.TabIndex = 0;
             // 
             // tbpExtended
@@ -271,12 +271,14 @@ namespace Plexdata.PasswordGenerator
             // 
             // gusExtended
             // 
+            this.gusExtended.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gusExtended.BackColor = System.Drawing.Color.Transparent;
-            this.gusExtended.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gusExtended.Location = new System.Drawing.Point(5, 5);
             this.gusExtended.Margin = new System.Windows.Forms.Padding(0);
             this.gusExtended.Name = "gusExtended";
-            this.gusExtended.Size = new System.Drawing.Size(182, 64);
+            this.gusExtended.Size = new System.Drawing.Size(564, 397);
             this.gusExtended.TabIndex = 1;
             // 
             // tbpExchange
@@ -298,7 +300,7 @@ namespace Plexdata.PasswordGenerator
             this.gusExchange.Location = new System.Drawing.Point(5, 5);
             this.gusExchange.Margin = new System.Windows.Forms.Padding(0);
             this.gusExchange.Name = "gusExchange";
-            this.gusExchange.Size = new System.Drawing.Size(182, 64);
+            this.gusExchange.Size = new System.Drawing.Size(564, 397);
             this.gusExchange.TabIndex = 0;
             // 
             // tbpSecurity

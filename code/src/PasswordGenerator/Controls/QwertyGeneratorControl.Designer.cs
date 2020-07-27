@@ -52,17 +52,19 @@ namespace Plexdata.PasswordGenerator.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.group1 = new System.Windows.Forms.GroupBox();
             this.lblResult = new System.Windows.Forms.Label();
             this.txtResult = new System.Windows.Forms.Label();
             this.lblSource = new System.Windows.Forms.Label();
             this.txtSource = new System.Windows.Forms.TextBox();
+            this.tipMain = new System.Windows.Forms.ToolTip(this.components);
             this.group1.SuspendLayout();
             this.SuspendLayout();
             // 
             // group1
             // 
-            this.group1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.group1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.group1.Controls.Add(this.lblResult);
             this.group1.Controls.Add(this.txtResult);
@@ -72,7 +74,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.group1.Margin = new System.Windows.Forms.Padding(0);
             this.group1.Name = "group1";
             this.group1.Padding = new System.Windows.Forms.Padding(5, 9, 5, 5);
-            this.group1.Size = new System.Drawing.Size(500, 134);
+            this.group1.Size = new System.Drawing.Size(500, 132);
             this.group1.TabIndex = 0;
             this.group1.TabStop = false;
             this.group1.Text = "Qwerty Check";
@@ -80,7 +82,7 @@ namespace Plexdata.PasswordGenerator.Controls
             // lblResult
             // 
             this.lblResult.AutoSize = true;
-            this.lblResult.Location = new System.Drawing.Point(8, 54);
+            this.lblResult.Location = new System.Drawing.Point(8, 55);
             this.lblResult.Name = "lblResult";
             this.lblResult.Size = new System.Drawing.Size(40, 13);
             this.lblResult.TabIndex = 12;
@@ -88,16 +90,17 @@ namespace Plexdata.PasswordGenerator.Controls
             // 
             // txtResult
             // 
-            this.txtResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtResult.Location = new System.Drawing.Point(80, 52);
             this.txtResult.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.txtResult.Name = "txtResult";
-            this.txtResult.Size = new System.Drawing.Size(412, 77);
+            this.txtResult.Size = new System.Drawing.Size(412, 70);
             this.txtResult.TabIndex = 13;
             this.txtResult.Text = "???";
+            this.tipMain.SetToolTip(this.txtResult, "Run generator to determine whether a password is considered as QWERTY password.");
             // 
             // lblSource
             // 
@@ -110,13 +113,14 @@ namespace Plexdata.PasswordGenerator.Controls
             // 
             // txtSource
             // 
-            this.txtSource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSource.Location = new System.Drawing.Point(80, 25);
             this.txtSource.Name = "txtSource";
             this.txtSource.Size = new System.Drawing.Size(412, 20);
             this.txtSource.TabIndex = 3;
             this.txtSource.Tag = "Source Password...";
+            this.tipMain.SetToolTip(this.txtSource, "Type or paste a password to be verified.");
             // 
             // QwertyGeneratorControl
             // 
@@ -139,5 +143,6 @@ namespace Plexdata.PasswordGenerator.Controls
         private System.Windows.Forms.TextBox txtSource;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label txtResult;
+        private System.Windows.Forms.ToolTip tipMain;
     }
 }

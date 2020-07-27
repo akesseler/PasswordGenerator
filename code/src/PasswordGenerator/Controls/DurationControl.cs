@@ -33,6 +33,7 @@ namespace Plexdata.PasswordGenerator.Controls
         public DurationControl()
         {
             this.InitializeComponent();
+            this.Reset();
         }
 
         public void SetDuration(Duration duration)
@@ -59,6 +60,11 @@ namespace Plexdata.PasswordGenerator.Controls
             this.txtWeeks.Text = duration.Weeks.ToString();
             this.txtDays.Text = duration.Days.ToString();
             this.txtTime.Text = String.Format("{0:00}:{1:00}:{2:00}.{3:000}", duration.Hours, duration.Minutes, duration.Seconds, duration.Milliseconds);
+        }
+
+        public void Reset()
+        {
+            this.SetDuration(null);
         }
     }
 }

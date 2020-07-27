@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-using Plexdata.Utilities.Password.Defines;
-using Plexdata.Utilities.Password.Interfaces;
 using Plexdata.PasswordGenerator.Enumerations;
 using Plexdata.PasswordGenerator.Extensions;
 using Plexdata.PasswordGenerator.Interfaces;
+using Plexdata.Utilities.Password.Defines;
+using Plexdata.Utilities.Password.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -43,8 +43,6 @@ namespace Plexdata.PasswordGenerator.Generators
 
     public class WirelessPasswordGenerator : IWirelessPasswordGenerator
     {
-        // TODO: Support custom password phrase for WEP key generation...
-
         #region Private Fields
 
         private readonly Random random = null;
@@ -108,6 +106,9 @@ namespace Plexdata.PasswordGenerator.Generators
                 case CommonType.WepKey256Bit:
                     results = this.GenerateWepKeys(source, settings.Length, settings.Amount);
                     break;
+                case CommonType.WepKeyCustom:
+                    results = this.GenerateWepKeyFromPhrase(settings.Phrase);
+                    break;
                 case CommonType.WpaKey:
                 case CommonType.Wpa2Key:
                     results = this.GenerateWpaKeys(source, settings.Length, settings.Amount);
@@ -139,6 +140,20 @@ namespace Plexdata.PasswordGenerator.Generators
 
                 yield return $"{value}\t{result}";
             }
+        }
+
+        private IEnumerable<String> GenerateWepKeyFromPhrase(String phrase)
+        {
+            if (String.IsNullOrEmpty(phrase))
+            {
+                yield return String.Empty;
+            }
+
+            Byte[] bytes = Encoding.ASCII.GetBytes(phrase);
+
+            String result = BitConverter.ToString(bytes).Replace("-", String.Empty).ToLower();
+
+            yield return $"{phrase}\t{result}";
         }
 
         private IEnumerable<String> GenerateWpaKeys(String source, Int32 length, Int32 amount)

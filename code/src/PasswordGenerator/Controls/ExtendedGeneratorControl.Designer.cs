@@ -52,29 +52,24 @@ namespace Plexdata.PasswordGenerator.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExtendedGeneratorControl));
             this.grpAttributes = new System.Windows.Forms.GroupBox();
-            this.btnAmount = new System.Windows.Forms.Button();
-            this.btnLength = new System.Windows.Forms.Button();
-            this.numAmount = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
             this.lblAmount = new System.Windows.Forms.Label();
-            this.numLength = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
             this.lblLength = new System.Windows.Forms.Label();
             this.chbDelete = new System.Windows.Forms.CheckBox();
             this.grpPasswords = new System.Windows.Forms.GroupBox();
             this.lstPasswords = new System.Windows.Forms.ListBox();
+            this.numAmount = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
+            this.numLength = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
             this.grpAttributes.SuspendLayout();
+            this.grpPasswords.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLength)).BeginInit();
-            this.grpPasswords.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpAttributes
             // 
-            this.grpAttributes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpAttributes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpAttributes.Controls.Add(this.btnAmount);
-            this.grpAttributes.Controls.Add(this.btnLength);
             this.grpAttributes.Controls.Add(this.numAmount);
             this.grpAttributes.Controls.Add(this.lblAmount);
             this.grpAttributes.Controls.Add(this.numLength);
@@ -82,108 +77,36 @@ namespace Plexdata.PasswordGenerator.Controls
             this.grpAttributes.Location = new System.Drawing.Point(0, 0);
             this.grpAttributes.Name = "grpAttributes";
             this.grpAttributes.Padding = new System.Windows.Forms.Padding(5, 9, 5, 5);
-            this.grpAttributes.Size = new System.Drawing.Size(500, 97);
+            this.grpAttributes.Size = new System.Drawing.Size(500, 81);
             this.grpAttributes.TabIndex = 0;
             this.grpAttributes.TabStop = false;
             this.grpAttributes.Text = "Attributes";
             // 
-            // btnAmount
-            // 
-            this.btnAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAmount.FlatAppearance.BorderSize = 0;
-            this.btnAmount.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(202)))), ((int)(((byte)(136)))));
-            this.btnAmount.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(155)))));
-            this.btnAmount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAmount.Image = ((System.Drawing.Image)(resources.GetObject("btnAmount.Image")));
-            this.btnAmount.Location = new System.Drawing.Point(466, 57);
-            this.btnAmount.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAmount.Name = "btnAmount";
-            this.btnAmount.Size = new System.Drawing.Size(26, 26);
-            this.btnAmount.TabIndex = 5;
-            this.btnAmount.TabStop = false;
-            this.btnAmount.Click += new System.EventHandler(this.OnResetButtonClick);
-            // 
-            // btnLength
-            // 
-            this.btnLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLength.FlatAppearance.BorderSize = 0;
-            this.btnLength.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(202)))), ((int)(((byte)(136)))));
-            this.btnLength.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(155)))));
-            this.btnLength.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLength.Image = ((System.Drawing.Image)(resources.GetObject("btnLength.Image")));
-            this.btnLength.Location = new System.Drawing.Point(466, 25);
-            this.btnLength.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLength.Name = "btnLength";
-            this.btnLength.Size = new System.Drawing.Size(26, 26);
-            this.btnLength.TabIndex = 2;
-            this.btnLength.TabStop = false;
-            this.btnLength.Click += new System.EventHandler(this.OnResetButtonClick);
-            // 
-            // numAmount
-            // 
-            this.numAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numAmount.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAmount.Location = new System.Drawing.Point(136, 57);
-            this.numAmount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numAmount.Name = "numAmount";
-            this.numAmount.Size = new System.Drawing.Size(327, 26);
-            this.numAmount.TabIndex = 4;
-            this.numAmount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numAmount.ValueChanged += new System.EventHandler(this.OnEditAmountChanged);
-            // 
             // lblAmount
             // 
-            this.lblAmount.Location = new System.Drawing.Point(8, 57);
+            this.lblAmount.AutoSize = true;
+            this.lblAmount.Location = new System.Drawing.Point(8, 55);
             this.lblAmount.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
             this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(120, 26);
-            this.lblAmount.TabIndex = 3;
-            this.lblAmount.Text = "&Result Count:";
+            this.lblAmount.Size = new System.Drawing.Size(46, 13);
+            this.lblAmount.TabIndex = 2;
+            this.lblAmount.Text = "&Amount:";
             this.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // numLength
-            // 
-            this.numLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numLength.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numLength.Location = new System.Drawing.Point(136, 25);
-            this.numLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numLength.Name = "numLength";
-            this.numLength.Size = new System.Drawing.Size(327, 26);
-            this.numLength.TabIndex = 1;
-            this.numLength.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numLength.ValueChanged += new System.EventHandler(this.OnEditLengthChanged);
             // 
             // lblLength
             // 
-            this.lblLength.Location = new System.Drawing.Point(8, 25);
+            this.lblLength.AutoSize = true;
+            this.lblLength.Location = new System.Drawing.Point(8, 29);
             this.lblLength.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
             this.lblLength.Name = "lblLength";
-            this.lblLength.Size = new System.Drawing.Size(120, 26);
+            this.lblLength.Size = new System.Drawing.Size(43, 13);
             this.lblLength.TabIndex = 0;
-            this.lblLength.Text = "Password &Length:";
+            this.lblLength.Text = "&Length:";
             this.lblLength.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chbDelete
             // 
-            this.chbDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.chbDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chbDelete.AutoSize = true;
             this.chbDelete.Location = new System.Drawing.Point(8, 25);
@@ -196,23 +119,23 @@ namespace Plexdata.PasswordGenerator.Controls
             // 
             // grpPasswords
             // 
-            this.grpPasswords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpPasswords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpPasswords.Controls.Add(this.chbDelete);
             this.grpPasswords.Controls.Add(this.lstPasswords);
-            this.grpPasswords.Location = new System.Drawing.Point(3, 103);
+            this.grpPasswords.Location = new System.Drawing.Point(0, 87);
             this.grpPasswords.Name = "grpPasswords";
             this.grpPasswords.Padding = new System.Windows.Forms.Padding(5, 9, 5, 5);
-            this.grpPasswords.Size = new System.Drawing.Size(497, 297);
+            this.grpPasswords.Size = new System.Drawing.Size(500, 313);
             this.grpPasswords.TabIndex = 1;
             this.grpPasswords.TabStop = false;
             this.grpPasswords.Text = "Passwords";
             // 
             // lstPasswords
             // 
-            this.lstPasswords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lstPasswords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstPasswords.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lstPasswords.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -227,9 +150,49 @@ namespace Plexdata.PasswordGenerator.Controls
             this.lstPasswords.Location = new System.Drawing.Point(8, 48);
             this.lstPasswords.Name = "lstPasswords";
             this.lstPasswords.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstPasswords.Size = new System.Drawing.Size(481, 241);
+            this.lstPasswords.Size = new System.Drawing.Size(484, 256);
             this.lstPasswords.TabIndex = 1;
             this.lstPasswords.SelectedIndexChanged += new System.EventHandler(this.OnPasswordsSelectedIndexChanged);
+            // 
+            // numAmount
+            // 
+            this.numAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numAmount.Location = new System.Drawing.Point(80, 51);
+            this.numAmount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numAmount.Name = "numAmount";
+            this.numAmount.Size = new System.Drawing.Size(412, 20);
+            this.numAmount.TabIndex = 3;
+            this.numAmount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numAmount.ValueChanged += new System.EventHandler(this.OnEditAmountChanged);
+            // 
+            // numLength
+            // 
+            this.numLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numLength.Location = new System.Drawing.Point(80, 25);
+            this.numLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numLength.Name = "numLength";
+            this.numLength.Size = new System.Drawing.Size(412, 20);
+            this.numLength.TabIndex = 1;
+            this.numLength.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numLength.ValueChanged += new System.EventHandler(this.OnEditLengthChanged);
             // 
             // ExtendedGeneratorControl
             // 
@@ -242,10 +205,11 @@ namespace Plexdata.PasswordGenerator.Controls
             this.Name = "ExtendedGeneratorControl";
             this.Size = new System.Drawing.Size(500, 400);
             this.grpAttributes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLength)).EndInit();
+            this.grpAttributes.PerformLayout();
             this.grpPasswords.ResumeLayout(false);
             this.grpPasswords.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLength)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -254,8 +218,6 @@ namespace Plexdata.PasswordGenerator.Controls
 
         private System.Windows.Forms.GroupBox grpAttributes;
         private System.Windows.Forms.CheckBox chbDelete;
-        private System.Windows.Forms.Button btnAmount;
-        private System.Windows.Forms.Button btnLength;
         private NumberUpDown numAmount;
         private System.Windows.Forms.Label lblAmount;
         private NumberUpDown numLength;

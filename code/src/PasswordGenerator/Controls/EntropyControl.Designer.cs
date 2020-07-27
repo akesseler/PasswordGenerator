@@ -64,8 +64,8 @@ namespace Plexdata.PasswordGenerator.Controls
             // 
             // group1
             // 
-            this.group1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.group1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.group1.BackColor = System.Drawing.Color.Transparent;
             this.group1.Controls.Add(this.txtSummary);
@@ -74,7 +74,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.group1.Controls.Add(this.lblEntropy);
             this.group1.Controls.Add(this.lblSummary);
             this.group1.Controls.Add(this.lblStrength);
-            this.group1.Location = new System.Drawing.Point(3, 3);
+            this.group1.Location = new System.Drawing.Point(0, 3);
             this.group1.Margin = new System.Windows.Forms.Padding(0);
             this.group1.Name = "group1";
             this.group1.Padding = new System.Windows.Forms.Padding(5);
@@ -85,19 +85,19 @@ namespace Plexdata.PasswordGenerator.Controls
             // 
             // txtSummary
             // 
-            this.txtSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSummary.Location = new System.Drawing.Point(80, 78);
             this.txtSummary.Name = "txtSummary";
-            this.txtSummary.Size = new System.Drawing.Size(362, 60);
+            this.txtSummary.Size = new System.Drawing.Size(362, 56);
             this.txtSummary.TabIndex = 9;
             this.txtSummary.Text = "???";
             // 
             // txtEntropy
             // 
-            this.txtEntropy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtEntropy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEntropy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEntropy.Location = new System.Drawing.Point(80, 25);
@@ -137,7 +137,7 @@ namespace Plexdata.PasswordGenerator.Controls
             // 
             // prgStrength
             // 
-            this.prgStrength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.prgStrength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.prgStrength.BackColor = System.Drawing.Color.Transparent;
             this.prgStrength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -157,7 +157,6 @@ namespace Plexdata.PasswordGenerator.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.group1);
-            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "EntropyControl";
             this.Size = new System.Drawing.Size(450, 150);
             this.group1.ResumeLayout(false);

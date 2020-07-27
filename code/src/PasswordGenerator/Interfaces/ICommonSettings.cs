@@ -36,6 +36,8 @@ namespace Plexdata.PasswordGenerator.Interfaces
 
         Int32 Length { get; set; }
 
+        String Phrase { get; set; }
+
         Boolean IsUppers { get; set; }
 
         Boolean IsLowers { get; set; }

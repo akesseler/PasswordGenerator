@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-using Plexdata.Utilities.Password.Defines;
-using Plexdata.Utilities.Password.Interfaces;
 using Plexdata.PasswordGenerator.Enumerations;
 using Plexdata.PasswordGenerator.Extensions;
 using Plexdata.PasswordGenerator.Interfaces;
+using Plexdata.Utilities.Password.Defines;
+using Plexdata.Utilities.Password.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

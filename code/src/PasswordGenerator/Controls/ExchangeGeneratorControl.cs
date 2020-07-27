@@ -25,18 +25,23 @@
 using Plexdata.PasswordGenerator.Events;
 using Plexdata.PasswordGenerator.Extensions;
 using Plexdata.PasswordGenerator.Factories;
+using Plexdata.PasswordGenerator.Helpers;
 using Plexdata.PasswordGenerator.Interfaces;
 using System;
 using System.ComponentModel;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Plexdata.PasswordGenerator.Controls
 {
-    public partial class ExchangeGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<IExchangeSettings>, IStatusRequester
+    public partial class ExchangeGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<IExchangeSettings>, IStatusRequester, ISettingsRequester, IResultWriter
     {
         #region Public Events
 
         public event UpdateStatusEventHandler UpdateStatus;
+
+        public event ShowSettingsEventHandler ShowSettings;
 
         #endregion
 
@@ -53,8 +58,28 @@ namespace Plexdata.PasswordGenerator.Controls
         {
             this.InitializeComponent();
 
+            StandardContextMenu contextMenu = StandardContextMenu.Create(this.OnContextMenuItemClick);
+            contextMenu.Opening += this.OnContextMenuOpening;
+
+            this.txtSource.ContextMenu = null;
+            this.txtSource.ContextMenuStrip = contextMenu;
             this.txtSource.SetWatermark(true);
+
+            this.txtResult.ContextMenu = null;
+            this.txtResult.ContextMenuStrip = contextMenu;
             this.txtResult.SetWatermark(true);
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public Boolean HasResult
+        {
+            get
+            {
+                return this.txtResult.Text.Length > 0;
+            }
         }
 
         #endregion
@@ -69,7 +94,7 @@ namespace Plexdata.PasswordGenerator.Controls
 
             if (String.IsNullOrWhiteSpace(source))
             {
-                MessageBox.Show(
+                MessageBox.Show(base.ParentForm,
                     "Provide a source password to be processed.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -78,6 +103,19 @@ namespace Plexdata.PasswordGenerator.Controls
             IExchangeGenerator generator = GeneratorFactory.Create<IExchangeGenerator>();
 
             this.txtResult.Text = generator.Generate(this.controlSettings, this.txtSource.Text);
+        }
+
+        public void WriteResult(Stream stream, Encoding encoding)
+        {
+            if (stream == null || !stream.CanWrite || encoding == null)
+            {
+                return;
+            }
+
+            using (TextWriter writer = new StreamWriter(stream, encoding))
+            {
+                writer.WriteLine(this.txtResult.Text);
+            }
         }
 
         public void Attach(IExchangeSettings controlSettings)
@@ -119,6 +157,11 @@ namespace Plexdata.PasswordGenerator.Controls
             this.UpdateStatus?.Invoke(this, new UpdateStatusEventArgs(label, value));
         }
 
+        protected void RaiseShowSettings()
+        {
+            this.ShowSettings?.Invoke(this, new ShowSettingsEventArgs(ShowSettingsEventArgs.ExchangeSettings));
+        }
+
         #endregion
 
         #region Private Methods
@@ -127,6 +170,95 @@ namespace Plexdata.PasswordGenerator.Controls
         {
             if (sender is IExchangeSettings settings)
             {
+            }
+        }
+
+        private void OnSettingsLinkClicked(Object sender, LinkLabelLinkClickedEventArgs args)
+        {
+            this.RaiseShowSettings();
+        }
+
+        private void OnContextMenuOpening(Object sender, CancelEventArgs args)
+        {
+            try
+            {
+                StandardContextMenu source = StandardContextMenu.MenuFromSender(sender, out Control control);
+
+                if (source == null) { return; }
+
+                source.DisableAll();
+
+                if (control == this.txtSource)
+                {
+                    source.Copy.Enabled = this.txtSource.Text.Length > 0;
+                    source.Cut.Enabled = this.txtSource.Text.Length > 0;
+                    source.Paste.Enabled = Clipboard.ContainsText();
+                    source.Clear.Enabled = this.txtSource.Text.Length > 0;
+                }
+                else if (control == this.txtResult)
+                {
+                    source.Copy.Enabled = this.txtResult.Text.Length > 0;
+                    source.Clear.Enabled = this.txtResult.Text.Length > 0;
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+        }
+
+        private void OnContextMenuItemClick(Object sender, EventArgs args)
+        {
+            try
+            {
+                ToolStripItem source = StandardContextMenu.ItemFromSender(sender, out StandardContextMenu parent);
+
+                if (source == null) { return; }
+
+                if (parent.IsCopy(source))
+                {
+                    if (parent.SourceControl == this.txtSource)
+                    {
+                        Clipboard.SetText(this.txtSource.Text);
+                    }
+                    else if (parent.SourceControl == this.txtResult)
+                    {
+                        Clipboard.SetText(this.txtResult.Text);
+                    }
+                }
+                else if (parent.IsCut(source))
+                {
+                    if (parent.SourceControl == this.txtSource)
+                    {
+                        Clipboard.SetText(this.txtSource.Text);
+                        this.txtSource.Text = String.Empty;
+                        this.txtResult.Text = String.Empty;
+                    }
+                }
+                else if (parent.IsPaste(source))
+                {
+                    if (parent.SourceControl == this.txtSource && Clipboard.ContainsText())
+                    {
+                        this.txtSource.Text = Clipboard.GetText().ClearLineEndings();
+                        this.txtResult.Text = String.Empty;
+                    }
+                }
+                else if (parent.IsClear(source))
+                {
+                    if (parent.SourceControl == this.txtSource)
+                    {
+                        this.txtSource.Text = String.Empty;
+                        this.txtResult.Text = String.Empty;
+                    }
+                    else if (parent.SourceControl == this.txtResult)
+                    {
+                        this.txtResult.Text = String.Empty;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
             }
         }
 

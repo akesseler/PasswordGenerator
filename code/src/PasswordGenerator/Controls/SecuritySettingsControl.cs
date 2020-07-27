@@ -156,7 +156,9 @@ namespace Plexdata.PasswordGenerator.Controls
                 }
                 catch
                 {
-                    MessageBox.Show(this, "Could not save data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(base.ParentForm,
+                        "Could not save data.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
