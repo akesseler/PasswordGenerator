@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+using Plexdata.PasswordGenerator.Events;
 using Plexdata.PasswordGenerator.Settings;
 using System;
 using System.Windows.Forms;
@@ -33,11 +34,13 @@ namespace Plexdata.PasswordGenerator.Dialogs
         public ProgramSettings settings = null;
 
         public SettingsDialog(ProgramSettings settings)
+            : base()
         {
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
             this.InitializeComponent();
 
+            this.Icon = Properties.Resources.MainIcon;
             this.radio1.Tag = this.page1;
             this.radio2.Tag = this.page2;
             this.radio3.Tag = this.page3;
@@ -46,9 +49,32 @@ namespace Plexdata.PasswordGenerator.Dialogs
             this.view.SelectedTab = this.page1;
         }
 
+        public SettingsDialog(ProgramSettings settings, String request)
+            : this(settings)
+        {
+            if (String.Equals(ShowSettingsEventArgs.ExtendedSettings, request, StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.radio1.Checked = true;
+            }
+            else if (String.Equals(ShowSettingsEventArgs.ExchangeSettings, request, StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.radio2.Checked = true;
+            }
+            else if (String.Equals(ShowSettingsEventArgs.SecuritySettings, request, StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.radio3.Checked = true;
+            }
+        }
+
         public static void Show(IWin32Window owner, ProgramSettings settings)
         {
             SettingsDialog dialog = new SettingsDialog(settings);
+            dialog.ShowDialog(owner);
+        }
+
+        public static void Show(IWin32Window owner, ProgramSettings settings, String request)
+        {
+            SettingsDialog dialog = new SettingsDialog(settings, request);
             dialog.ShowDialog(owner);
         }
 

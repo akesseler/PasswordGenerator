@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnAmount.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAE8SURBVDhPhdNNK0RhGMbxM80QC2I3NpOtrSxsiGIjJc0H
-        GFYWlLKxPTsp+QCkKBuSlfgEymJWJHbsrFh4T4n/NZ57uudxjKd+Ned+uc6Z00ySpmnC6cWMPhtOJ/ox
-        jkEUfN/NJSXcoBoKfdjCK76cR+yiJw44gwaqmMRzuP7LA6Z9wC3U0OJn+Cz32MEK9vEC671jIA7wttFh
-        dwmDRZzAZrTXil8BHzjEASpRSDvOYbNTyHwC0SMP+4AQUg592VPhwhWM3sdovBwC9FVs7lKFAtoiLVnL
-        wumCBVxnDjXDGXEBR1bsxjwWMBEvGU4Ox7CAOWvop/wWirKIXLScxxps5glFP7AUGuYUCtJbX8YVfH+2
-        thfdYSM0/7OO2hPWA1xQBXfIWlS93DDvL+rFn6cZwyo2of/DEPKNs2nyDWE28fMTyfhSAAAAAElFTkSu
-        QmCC
-</value>
-  </data>
-  <data name="btnLength.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAE8SURBVDhPhdNNK0RhGMbxM80QC2I3NpOtrSxsiGIjJc0H
-        GFYWlLKxPTsp+QCkKBuSlfgEymJWJHbsrFh4T4n/NZ57uudxjKd+Ned+uc6Z00ySpmnC6cWMPhtOJ/ox
-        jkEUfN/NJSXcoBoKfdjCK76cR+yiJw44gwaqmMRzuP7LA6Z9wC3U0OJn+Cz32MEK9vEC671jIA7wttFh
-        dwmDRZzAZrTXil8BHzjEASpRSDvOYbNTyHwC0SMP+4AQUg592VPhwhWM3sdovBwC9FVs7lKFAtoiLVnL
-        wumCBVxnDjXDGXEBR1bsxjwWMBEvGU4Ox7CAOWvop/wWirKIXLScxxps5glFP7AUGuYUCtJbX8YVfH+2
-        thfdYSM0/7OO2hPWA1xQBXfIWlS93DDvL+rFn6cZwyo2of/DEPKNs2nyDWE28fMTyfhSAAAAAElFTkSu
-        QmCC
-</value>
-  </data>
 </root>

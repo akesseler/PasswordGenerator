@@ -35,13 +35,14 @@ using Plexdata.Utilities.Password.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Plexdata.PasswordGenerator.Controls
 {
-    // TODO: Support custom password phrase for WEP key generation...
-    public partial class CommonGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<ICommonSettings>, IStatusRequester
+    public partial class CommonGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<ICommonSettings>, IStatusRequester, IResultWriter
     {
         #region Public Events
 
@@ -64,6 +65,8 @@ namespace Plexdata.PasswordGenerator.Controls
                 this.Remarks = source.Remarks;
                 this.Type = type;
                 this.IsLengthEnabled = this.GetLengthEnabled(type);
+                this.IsAmountEnabled = this.GetAmountEnabled(type);
+                this.IsPhraseEnabled = this.GetPhraseEnabled(type);
                 this.LengthMinimum = this.GetLengthMinimum(type);
                 this.LengthMaximum = this.GetLengthMaximum(type);
                 this.LengthValue = this.GetLengthValue(type);
@@ -77,6 +80,10 @@ namespace Plexdata.PasswordGenerator.Controls
             public CommonType Type { get; private set; }
 
             public Boolean IsLengthEnabled { get; private set; }
+
+            public Boolean IsAmountEnabled { get; private set; }
+
+            public Boolean IsPhraseEnabled { get; private set; }
 
             public Int32 LengthMinimum { get; private set; }
 
@@ -101,9 +108,61 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.WepKey128Bit:
                     case CommonType.WepKey152Bit:
                     case CommonType.WepKey256Bit:
+                    case CommonType.WepKeyCustom:
                     case CommonType.WpaKey: // No rules found
                         return false;
                     case CommonType.Wpa2Key:
+                        return true;
+                    default:
+                        throw new NotSupportedException($"Password type of \"{value}\" is not yet supported.");
+                }
+            }
+
+            private Boolean GetAmountEnabled(CommonType value)
+            {
+                switch (value)
+                {
+                    case CommonType.Nothing:
+                        return false;
+                    case CommonType.InternetPassword1:
+                    case CommonType.InternetPassword2:
+                    case CommonType.InternetPassword3:
+                    case CommonType.PasswordManager1:
+                    case CommonType.PasswordManager2:
+                    case CommonType.PasswordManager3:
+                    case CommonType.WepKey64Bit:
+                    case CommonType.WepKey128Bit:
+                    case CommonType.WepKey152Bit:
+                    case CommonType.WepKey256Bit:
+                    case CommonType.WpaKey: // No rules found
+                    case CommonType.Wpa2Key:
+                        return true;
+                    case CommonType.WepKeyCustom:
+                        return false;
+                    default:
+                        throw new NotSupportedException($"Password type of \"{value}\" is not yet supported.");
+                }
+            }
+
+            private Boolean GetPhraseEnabled(CommonType value)
+            {
+                switch (value)
+                {
+                    case CommonType.Nothing:
+                    case CommonType.InternetPassword1:
+                    case CommonType.InternetPassword2:
+                    case CommonType.InternetPassword3:
+                    case CommonType.PasswordManager1:
+                    case CommonType.PasswordManager2:
+                    case CommonType.PasswordManager3:
+                    case CommonType.WepKey64Bit:
+                    case CommonType.WepKey128Bit:
+                    case CommonType.WepKey152Bit:
+                    case CommonType.WepKey256Bit:
+                    case CommonType.WpaKey: // No rules found
+                    case CommonType.Wpa2Key:
+                        return false;
+                    case CommonType.WepKeyCustom:
                         return true;
                     default:
                         throw new NotSupportedException($"Password type of \"{value}\" is not yet supported.");
@@ -136,6 +195,8 @@ namespace Plexdata.PasswordGenerator.Controls
                         return 32;
                     case CommonType.WepKey256Bit:
                         return 58;
+                    case CommonType.WepKeyCustom:
+                        return 0;
                     case CommonType.WpaKey: // No rules found
                         return 0;
                     case CommonType.Wpa2Key:
@@ -162,6 +223,8 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.WepKey256Bit:
                     case CommonType.WpaKey: // No rules found
                         return this.GetLengthMinimum(value);
+                    case CommonType.WepKeyCustom:
+                        return this.GetLengthMinimum(CommonType.WepKey256Bit) / 2; // Exceptionally, it's the character count.
                     case CommonType.Wpa2Key:
                         return 63;
                     default:
@@ -184,6 +247,7 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.WepKey128Bit:
                     case CommonType.WepKey152Bit:
                     case CommonType.WepKey256Bit:
+                    case CommonType.WepKeyCustom:
                     case CommonType.WpaKey: // No rules found
                         return this.GetLengthMinimum(value);
                     case CommonType.Wpa2Key:
@@ -210,6 +274,7 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.WepKey152Bit:
                     case CommonType.WepKey256Bit:
                         return true;
+                    case CommonType.WepKeyCustom:
                     case CommonType.WpaKey: // No rules found
                         return false;
                     case CommonType.Wpa2Key:
@@ -244,9 +309,22 @@ namespace Plexdata.PasswordGenerator.Controls
             StandardContextMenu contextMenu = StandardContextMenu.Create(this.OnContextMenuItemClick);
             contextMenu.Opening += this.OnContextMenuOpening;
 
-            this.numLength.ContextMenuStrip = StandardContextMenu.Empty;
+            this.numLength.ContextMenuStrip = contextMenu;
             this.numAmount.ContextMenuStrip = contextMenu;
+            this.txtPhrase.ContextMenuStrip = contextMenu;
             this.lstPasswords.ContextMenuStrip = contextMenu;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public Boolean HasResult
+        {
+            get
+            {
+                return this.lstPasswords.Items.Count > 0;
+            }
         }
 
         #endregion
@@ -261,16 +339,23 @@ namespace Plexdata.PasswordGenerator.Controls
             {
                 if (selected.Type == CommonType.Nothing)
                 {
-                    MessageBox.Show(
+                    MessageBox.Show(base.ParentForm,
                         "Please choose one of the password types.", "Warning",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
+                }
 
+                if (selected.Type == CommonType.WepKeyCustom && this.txtPhrase.TextLength < 1)
+                {
+                    MessageBox.Show(base.ParentForm,
+                        "Please provide a custom password phrase.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
                 if (selected.IsPoolsEnabled && !this.chkUppers.Checked && !this.chkLowers.Checked && !this.chkDigits.Checked && !this.chkExtras.Checked)
                 {
-                    MessageBox.Show(
+                    MessageBox.Show(base.ParentForm,
                         "Please choose at least one of the character pools.", "Warning",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -284,6 +369,22 @@ namespace Plexdata.PasswordGenerator.Controls
                 ICommonGenerator generator = GeneratorFactory.Create<ICommonGenerator>();
 
                 this.lstPasswords.Items.AddRange(generator.Generate(this.controlSettings, generatorSettings).ToArray());
+            }
+        }
+
+        public void WriteResult(Stream stream, Encoding encoding)
+        {
+            if (stream == null || !stream.CanWrite || encoding == null)
+            {
+                return;
+            }
+
+            using (TextWriter writer = new StreamWriter(stream, encoding))
+            {
+                foreach (Object password in this.lstPasswords.Items)
+                {
+                    writer.WriteLine(password.ToString());
+                }
             }
         }
 
@@ -308,6 +409,7 @@ namespace Plexdata.PasswordGenerator.Controls
             }
 
             this.numAmount.Number = this.controlSettings.Amount;
+            this.txtPhrase.Text = this.controlSettings.Phrase;
             this.chkUppers.Checked = this.controlSettings.IsUppers;
             this.chkLowers.Checked = this.controlSettings.IsLowers;
             this.chkDigits.Checked = this.controlSettings.IsDigits;
@@ -374,6 +476,15 @@ namespace Plexdata.PasswordGenerator.Controls
                 this.numLength.Number = selected.LengthMinimum;
                 this.numLength.Number = selected.LengthValue;
                 this.numLength.Enabled = selected.IsLengthEnabled;
+                this.numAmount.Enabled = selected.IsAmountEnabled;
+                this.txtPhrase.Enabled = selected.IsPhraseEnabled;
+
+                // Code for special treatment is always a bad idea.
+                if (selected.Type == CommonType.WepKeyCustom)
+                {
+                    this.txtPhrase.MaxLength = selected.LengthMaximum;
+                    this.numLength.Value = this.txtPhrase.TextLength;
+                }
 
                 this.chkUppers.Enabled = selected.IsPoolsEnabled;
                 this.chkLowers.Enabled = selected.IsPoolsEnabled;
@@ -398,6 +509,22 @@ namespace Plexdata.PasswordGenerator.Controls
             else if (sender == this.numAmount)
             {
                 this.controlSettings.Amount = this.numAmount.Number;
+            }
+        }
+
+        private void OnTextValueChanged(Object sender, EventArgs args)
+        {
+            if (this.controlSettings == null) { return; }
+
+            if (sender == this.txtPhrase)
+            {
+                this.controlSettings.Phrase = this.txtPhrase.Text;
+
+                // Code for special treatment is always a bad idea.
+                if (this.controlSettings.Type == CommonType.WepKeyCustom)
+                {
+                    this.numLength.Value = this.txtPhrase.TextLength;
+                }
             }
         }
 
@@ -445,19 +572,19 @@ namespace Plexdata.PasswordGenerator.Controls
                     switch (this.strengthCalculator.Calculate(entropy))
                     {
                         case Strength.VeryWeak:
-                            value = $"Very Weak ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Very Weak ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.Weak:
-                            value = $"Weak ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Weak ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.Reasonable:
-                            value = $"Reasonable ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Reasonable ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.Strong:
-                            value = $"Strong ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Strong ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.VeryStrong:
-                            value = $"Very Strong ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Very Strong ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         default:
                             return;
@@ -488,12 +615,21 @@ namespace Plexdata.PasswordGenerator.Controls
 
                 if (control == this.numAmount)
                 {
-                    source.Copy.Enabled = true;
                     source.Clear.Enabled = true;
+                }
+                else if (control == this.numLength)
+                {
+                    source.Clear.Enabled = true;
+                }
+                else if (control == this.txtPhrase)
+                {
+                    source.Copy.Enabled = this.txtPhrase.TextLength > 0;
+                    source.Cut.Enabled = this.txtPhrase.TextLength > 0;
+                    source.Paste.Enabled = Clipboard.ContainsText();
+                    source.Clear.Enabled = this.txtPhrase.TextLength > 0;
                 }
                 else if (control == this.lstPasswords)
                 {
-
                     source.Copy.Enabled = this.lstPasswords.SelectedIndices.Count > 0;
                     source.Cut.Enabled = this.lstPasswords.SelectedIndices.Count > 0;
                     source.Clear.Enabled = this.lstPasswords.Items.Count > 0;
@@ -515,9 +651,9 @@ namespace Plexdata.PasswordGenerator.Controls
 
                 if (parent.IsCopy(source))
                 {
-                    if (parent.SourceControl == this.numAmount)
+                    if (parent.SourceControl == this.txtPhrase)
                     {
-                        Clipboard.SetText(this.numAmount.Text);
+                        Clipboard.SetText(this.txtPhrase.Text);
                     }
                     else if (parent.SourceControl == this.lstPasswords)
                     {
@@ -526,16 +662,36 @@ namespace Plexdata.PasswordGenerator.Controls
                 }
                 else if (parent.IsCut(source))
                 {
-                    if (parent.SourceControl == this.lstPasswords)
+                    if (parent.SourceControl == this.txtPhrase)
+                    {
+                        Clipboard.SetText(this.txtPhrase.Text);
+                        this.txtPhrase.Text = String.Empty;
+                    }
+                    else if (parent.SourceControl == this.lstPasswords)
                     {
                         this.CopySelectedPasswords(true);
                     }
                 }
+                else if (parent.IsPaste(source))
+                {
+                    if (parent.SourceControl == this.txtPhrase && Clipboard.ContainsText())
+                    {
+                        this.txtPhrase.Text = Clipboard.GetText().ClearLineEndings();
+                    }
+                }
                 else if (parent.IsClear(source))
                 {
-                    if (parent.SourceControl == this.numAmount)
+                    if (parent.SourceControl == this.numLength)
+                    {
+                        this.numLength.Value = this.numLength.Minimum;
+                    }
+                    else if (parent.SourceControl == this.numAmount)
                     {
                         this.numAmount.Value = this.numAmount.Minimum;
+                    }
+                    else if (parent.SourceControl == this.txtPhrase)
+                    {
+                        this.txtPhrase.Clear();
                     }
                     else if (parent.SourceControl == this.lstPasswords)
                     {

@@ -60,20 +60,22 @@ namespace Plexdata.PasswordGenerator.Controls
             this.txtRemarks = new System.Windows.Forms.Label();
             this.lblLength = new System.Windows.Forms.Label();
             this.group1 = new System.Windows.Forms.GroupBox();
+            this.txtPhrase = new System.Windows.Forms.TextBox();
             this.chkExtras = new System.Windows.Forms.CheckBox();
             this.chkDigits = new System.Windows.Forms.CheckBox();
             this.chkLowers = new System.Windows.Forms.CheckBox();
             this.chkUppers = new System.Windows.Forms.CheckBox();
-            this.numAmount = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
-            this.numLength = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
+            this.lblPhrase = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
             this.grpPasswords = new System.Windows.Forms.GroupBox();
             this.chbDelete = new System.Windows.Forms.CheckBox();
             this.lstPasswords = new System.Windows.Forms.ListBox();
+            this.numAmount = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
+            this.numLength = new Plexdata.PasswordGenerator.Controls.NumberUpDown();
             this.group1.SuspendLayout();
+            this.grpPasswords.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLength)).BeginInit();
-            this.grpPasswords.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmbTypes
@@ -100,10 +102,10 @@ namespace Plexdata.PasswordGenerator.Controls
             // lblRemarks
             // 
             this.lblRemarks.AutoSize = true;
-            this.lblRemarks.Location = new System.Drawing.Point(8, 151);
+            this.lblRemarks.Location = new System.Drawing.Point(8, 177);
             this.lblRemarks.Name = "lblRemarks";
             this.lblRemarks.Size = new System.Drawing.Size(52, 13);
-            this.lblRemarks.TabIndex = 10;
+            this.lblRemarks.TabIndex = 12;
             this.lblRemarks.Text = "Remarks:";
             // 
             // txtRemarks
@@ -112,11 +114,11 @@ namespace Plexdata.PasswordGenerator.Controls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRemarks.Location = new System.Drawing.Point(80, 150);
+            this.txtRemarks.Location = new System.Drawing.Point(80, 176);
             this.txtRemarks.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(412, 54);
-            this.txtRemarks.TabIndex = 11;
+            this.txtRemarks.Size = new System.Drawing.Size(412, 50);
+            this.txtRemarks.TabIndex = 13;
             this.txtRemarks.Text = "???";
             // 
             // lblLength
@@ -132,6 +134,7 @@ namespace Plexdata.PasswordGenerator.Controls
             // 
             this.group1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.group1.Controls.Add(this.txtPhrase);
             this.group1.Controls.Add(this.chkExtras);
             this.group1.Controls.Add(this.chkDigits);
             this.group1.Controls.Add(this.chkLowers);
@@ -141,6 +144,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.group1.Controls.Add(this.txtRemarks);
             this.group1.Controls.Add(this.numAmount);
             this.group1.Controls.Add(this.numLength);
+            this.group1.Controls.Add(this.lblPhrase);
             this.group1.Controls.Add(this.lblAmount);
             this.group1.Controls.Add(this.lblLength);
             this.group1.Controls.Add(this.lblTypes);
@@ -148,21 +152,33 @@ namespace Plexdata.PasswordGenerator.Controls
             this.group1.Margin = new System.Windows.Forms.Padding(0);
             this.group1.Name = "group1";
             this.group1.Padding = new System.Windows.Forms.Padding(5, 9, 5, 5);
-            this.group1.Size = new System.Drawing.Size(500, 210);
-            this.group1.TabIndex = 5;
+            this.group1.Size = new System.Drawing.Size(500, 236);
+            this.group1.TabIndex = 0;
             this.group1.TabStop = false;
             this.group1.Text = "Source Information";
+            // 
+            // txtPhrase
+            // 
+            this.txtPhrase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhrase.Location = new System.Drawing.Point(80, 104);
+            this.txtPhrase.Name = "txtPhrase";
+            this.txtPhrase.Size = new System.Drawing.Size(412, 20);
+            this.txtPhrase.TabIndex = 7;
+            this.tooltip.SetToolTip(this.txtPhrase, "The custom password phrase to be used.");
+            this.txtPhrase.TextChanged += new System.EventHandler(this.OnTextValueChanged);
             // 
             // chkExtras
             // 
             this.chkExtras.AutoSize = true;
             this.chkExtras.Checked = true;
             this.chkExtras.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkExtras.Location = new System.Drawing.Point(201, 127);
+            this.chkExtras.Location = new System.Drawing.Point(201, 153);
             this.chkExtras.Name = "chkExtras";
             this.chkExtras.Size = new System.Drawing.Size(115, 17);
-            this.chkExtras.TabIndex = 9;
+            this.chkExtras.TabIndex = 11;
             this.chkExtras.Text = "Special Characters";
+            this.tooltip.SetToolTip(this.chkExtras, "The password generator should include special characters.");
             this.chkExtras.UseVisualStyleBackColor = true;
             this.chkExtras.CheckedChanged += new System.EventHandler(this.OnPoolsCheckedChanged);
             // 
@@ -171,11 +187,12 @@ namespace Plexdata.PasswordGenerator.Controls
             this.chkDigits.AutoSize = true;
             this.chkDigits.Checked = true;
             this.chkDigits.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDigits.Location = new System.Drawing.Point(80, 127);
+            this.chkDigits.Location = new System.Drawing.Point(80, 153);
             this.chkDigits.Name = "chkDigits";
             this.chkDigits.Size = new System.Drawing.Size(102, 17);
-            this.chkDigits.TabIndex = 8;
+            this.chkDigits.TabIndex = 9;
             this.chkDigits.Text = "Numerical Digits";
+            this.tooltip.SetToolTip(this.chkDigits, "The password generator should include numerical digits.");
             this.chkDigits.UseVisualStyleBackColor = true;
             this.chkDigits.CheckedChanged += new System.EventHandler(this.OnPoolsCheckedChanged);
             // 
@@ -184,11 +201,12 @@ namespace Plexdata.PasswordGenerator.Controls
             this.chkLowers.AutoSize = true;
             this.chkLowers.Checked = true;
             this.chkLowers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkLowers.Location = new System.Drawing.Point(201, 104);
+            this.chkLowers.Location = new System.Drawing.Point(201, 130);
             this.chkLowers.Name = "chkLowers";
             this.chkLowers.Size = new System.Drawing.Size(113, 17);
-            this.chkLowers.TabIndex = 7;
+            this.chkLowers.TabIndex = 10;
             this.chkLowers.Text = "Lowercase Letters";
+            this.tooltip.SetToolTip(this.chkLowers, "The password generator should include lowercase letters.");
             this.chkLowers.UseVisualStyleBackColor = true;
             this.chkLowers.CheckedChanged += new System.EventHandler(this.OnPoolsCheckedChanged);
             // 
@@ -197,43 +215,23 @@ namespace Plexdata.PasswordGenerator.Controls
             this.chkUppers.AutoSize = true;
             this.chkUppers.Checked = true;
             this.chkUppers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUppers.Location = new System.Drawing.Point(80, 104);
+            this.chkUppers.Location = new System.Drawing.Point(80, 130);
             this.chkUppers.Name = "chkUppers";
             this.chkUppers.Size = new System.Drawing.Size(93, 17);
-            this.chkUppers.TabIndex = 6;
+            this.chkUppers.TabIndex = 8;
             this.chkUppers.Text = "Capital Letters";
+            this.tooltip.SetToolTip(this.chkUppers, "The password generator should include capital letters.");
             this.chkUppers.UseVisualStyleBackColor = true;
             this.chkUppers.CheckedChanged += new System.EventHandler(this.OnPoolsCheckedChanged);
             // 
-            // numAmount
+            // lblPhrase
             // 
-            this.numAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numAmount.Location = new System.Drawing.Point(80, 78);
-            this.numAmount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numAmount.Name = "numAmount";
-            this.numAmount.Size = new System.Drawing.Size(412, 20);
-            this.numAmount.TabIndex = 5;
-            this.numAmount.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numAmount.ValueChanged += new System.EventHandler(this.OnNumberValueChanged);
-            // 
-            // numLength
-            // 
-            this.numLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numLength.Location = new System.Drawing.Point(80, 52);
-            this.numLength.Name = "numLength";
-            this.numLength.Size = new System.Drawing.Size(412, 20);
-            this.numLength.TabIndex = 3;
-            this.numLength.ValueChanged += new System.EventHandler(this.OnNumberValueChanged);
+            this.lblPhrase.AutoSize = true;
+            this.lblPhrase.Location = new System.Drawing.Point(8, 107);
+            this.lblPhrase.Name = "lblPhrase";
+            this.lblPhrase.Size = new System.Drawing.Size(43, 13);
+            this.lblPhrase.TabIndex = 6;
+            this.lblPhrase.Text = "&Phrase:";
             // 
             // lblAmount
             // 
@@ -251,11 +249,11 @@ namespace Plexdata.PasswordGenerator.Controls
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpPasswords.Controls.Add(this.chbDelete);
             this.grpPasswords.Controls.Add(this.lstPasswords);
-            this.grpPasswords.Location = new System.Drawing.Point(0, 216);
+            this.grpPasswords.Location = new System.Drawing.Point(0, 239);
             this.grpPasswords.Name = "grpPasswords";
             this.grpPasswords.Padding = new System.Windows.Forms.Padding(5, 9, 5, 5);
-            this.grpPasswords.Size = new System.Drawing.Size(500, 181);
-            this.grpPasswords.TabIndex = 6;
+            this.grpPasswords.Size = new System.Drawing.Size(500, 161);
+            this.grpPasswords.TabIndex = 1;
             this.grpPasswords.TabStop = false;
             this.grpPasswords.Text = "Passwords";
             // 
@@ -267,7 +265,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.chbDelete.Location = new System.Drawing.Point(8, 25);
             this.chbDelete.Name = "chbDelete";
             this.chbDelete.Size = new System.Drawing.Size(131, 17);
-            this.chbDelete.TabIndex = 1;
+            this.chbDelete.TabIndex = 0;
             this.chbDelete.Text = "&Delete existing results.";
             this.chbDelete.UseVisualStyleBackColor = true;
             // 
@@ -289,9 +287,41 @@ namespace Plexdata.PasswordGenerator.Controls
             this.lstPasswords.Location = new System.Drawing.Point(8, 48);
             this.lstPasswords.Name = "lstPasswords";
             this.lstPasswords.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstPasswords.Size = new System.Drawing.Size(484, 125);
-            this.lstPasswords.TabIndex = 0;
+            this.lstPasswords.Size = new System.Drawing.Size(484, 103);
+            this.lstPasswords.TabIndex = 1;
             this.lstPasswords.SelectedIndexChanged += new System.EventHandler(this.OnPasswordsSelectedIndexChanged);
+            // 
+            // numAmount
+            // 
+            this.numAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numAmount.Location = new System.Drawing.Point(80, 78);
+            this.numAmount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numAmount.Name = "numAmount";
+            this.numAmount.Size = new System.Drawing.Size(412, 20);
+            this.numAmount.TabIndex = 5;
+            this.tooltip.SetToolTip(this.numAmount, "The number of passwords to be generated.");
+            this.numAmount.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numAmount.ValueChanged += new System.EventHandler(this.OnNumberValueChanged);
+            // 
+            // numLength
+            // 
+            this.numLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numLength.Location = new System.Drawing.Point(80, 52);
+            this.numLength.Name = "numLength";
+            this.numLength.Size = new System.Drawing.Size(412, 20);
+            this.numLength.TabIndex = 3;
+            this.tooltip.SetToolTip(this.numLength, "The number of characters.");
+            this.numLength.ValueChanged += new System.EventHandler(this.OnNumberValueChanged);
             // 
             // CommonGeneratorControl
             // 
@@ -304,10 +334,10 @@ namespace Plexdata.PasswordGenerator.Controls
             this.Size = new System.Drawing.Size(500, 400);
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLength)).EndInit();
             this.grpPasswords.ResumeLayout(false);
             this.grpPasswords.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLength)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -330,5 +360,7 @@ namespace Plexdata.PasswordGenerator.Controls
         private System.Windows.Forms.GroupBox grpPasswords;
         private System.Windows.Forms.ListBox lstPasswords;
         private System.Windows.Forms.CheckBox chbDelete;
+        private System.Windows.Forms.TextBox txtPhrase;
+        private System.Windows.Forms.Label lblPhrase;
     }
 }

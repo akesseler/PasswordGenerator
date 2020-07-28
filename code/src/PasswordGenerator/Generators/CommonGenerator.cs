@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-using Plexdata.Utilities.Password.Factories;
-using Plexdata.Utilities.Password.Interfaces;
 using Plexdata.PasswordGenerator.Enumerations;
 using Plexdata.PasswordGenerator.Factories;
 using Plexdata.PasswordGenerator.Interfaces;
+using Plexdata.Utilities.Password.Factories;
+using Plexdata.Utilities.Password.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -82,6 +82,7 @@ namespace Plexdata.PasswordGenerator.Generators
                 case CommonType.WepKey128Bit:
                 case CommonType.WepKey152Bit:
                 case CommonType.WepKey256Bit:
+                case CommonType.WepKeyCustom:
                 case CommonType.WpaKey:
                 case CommonType.Wpa2Key:
                     return this.GenerateWirelessPasswords(settings, collector);

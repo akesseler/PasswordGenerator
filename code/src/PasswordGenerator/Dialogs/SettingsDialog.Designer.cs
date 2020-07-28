@@ -124,8 +124,8 @@ namespace Plexdata.PasswordGenerator.Dialogs
             // 
             // splitter
             // 
-            this.splitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitter.IsSplitterFixed = true;

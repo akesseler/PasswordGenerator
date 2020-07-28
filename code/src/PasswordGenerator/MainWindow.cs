@@ -22,22 +22,26 @@
  * SOFTWARE.
  */
 
+using Plexdata.PasswordGenerator.Controls;
 using Plexdata.PasswordGenerator.Dialogs;
 using Plexdata.PasswordGenerator.Events;
 using Plexdata.PasswordGenerator.Extensions;
 using Plexdata.PasswordGenerator.Interfaces;
 using Plexdata.PasswordGenerator.Settings;
 using System;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Plexdata.PasswordGenerator
 {
-    // TODO: Remove or put somewhere else...
-    // Für common => https://www.gaijin.at/de/tools/password-generator
-    // Für Extended => Exclude Similar Characters Like: https://passwordsgenerator.net
-    // http://cubicspot.blogspot.com/2011/11/how-to-calculate-password-strength.html?m=1
-    // http://www.passwordmeter.com => Berechnung mit anzeige der einzelnen werte
-    // https://keepass.info/help/base/pwgenerator.html Unten stehen die Patterns
+    // List of more interesting information as well as examples.
+    // Example password security calculation:   http://www.passwordmeter.com
+    // Example of exclude similar characters:   https://passwordsgenerator.net
+    // Example of password patterns (and more): https://keepass.info/help/base/pwgenerator.html
+    // Example of a common password generator:  https://www.gaijin.at/de/tools/password-generator
+    // How to calculate password strength:      http://cubicspot.blogspot.com/2011/11/how-to-calculate-password-strength.html?m=1
+
     public partial class MainWindow : Form
     {
         #region Private Fields
@@ -49,9 +53,12 @@ namespace Plexdata.PasswordGenerator
         #region Construction
 
         public MainWindow()
+            : base()
         {
             this.InitializeComponent();
 
+            this.Icon = Properties.Resources.MainIcon;
+            this.Text = InfoDialog.Title;
             this.tssLabel.Text = String.Empty;
             this.tssValue.Text = String.Empty;
         }
@@ -75,7 +82,7 @@ namespace Plexdata.PasswordGenerator
 
             this.settings.MainWindow.EnsureDisplayAttributes(this);
 
-            if (this.settings.MainWindow.LastVisible < 0 || this.settings.MainWindow.LastVisible > tvcContent.TabCount)
+            if (this.settings.MainWindow.LastVisible < 0 || this.settings.MainWindow.LastVisible > this.tvcContent.TabCount)
             {
                 this.settings.MainWindow.LastVisible = 0;
             }
@@ -83,13 +90,15 @@ namespace Plexdata.PasswordGenerator
             this.tvcContent.SelectedIndex = this.settings.MainWindow.LastVisible;
 
             this.gusCommon.UpdateStatus += this.OnControlUpdateStatus;
-            this.gusExtended.UpdateStatus += this.OnControlUpdateStatus;
             this.gusExchange.UpdateStatus += this.OnControlUpdateStatus;
+            this.gusExtended.UpdateStatus += this.OnControlUpdateStatus;
             this.gusSecurity.UpdateStatus += this.OnControlUpdateStatus;
 
+            this.gusExchange.ShowSettings += this.OnControlShowSettings;
+
             this.gusCommon.Attach(this.settings.CommonData);
-            this.gusExtended.Attach(this.settings.ExtendedData);
             this.gusExchange.Attach(this.settings.ExchangeData);
+            this.gusExtended.Attach(this.settings.ExtendedData);
             this.gusSecurity.Attach(this.settings.SecurityData);
         }
 
@@ -125,9 +134,39 @@ namespace Plexdata.PasswordGenerator
 
         private void OnSaveButtonClick(Object sender, EventArgs args)
         {
-            MessageBox.Show("To be implemented", "Save");
+            IResultWriter affected = this.tvcContent.SelectedTab.Controls[0] as IResultWriter;
 
-            this.SaveSettings(this.settings.ExtendedData);
+            if (affected == null || !affected.HasResult)
+            {
+                return;
+            }
+
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Title = "Save Passwords",
+                Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                FileName = $"passwords-{DateTime.Now:yyyyMMddHHmmss}.txt",
+                RestoreDirectory = true
+            };
+
+            if (dialog.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
+
+            try
+            {
+                using (Stream stream = dialog.OpenFile())
+                {
+                    affected.WriteResult(stream, Encoding.UTF8);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(this,
+                    $"Could not save file. See message below for more details. {Environment.NewLine.Repeat(2)}{exception.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void OnPlayButtonClick(Object sender, EventArgs args)
@@ -144,7 +183,9 @@ namespace Plexdata.PasswordGenerator
 
         private void OnInfoButtonClick(Object sender, EventArgs args)
         {
-            MessageBox.Show("To be implemented", "Info");
+            InfoDialog dialog = new InfoDialog();
+
+            dialog.ShowDialog(this);
         }
 
         private void OnControlUpdateStatus(Object sender, UpdateStatusEventArgs args)
@@ -161,22 +202,18 @@ namespace Plexdata.PasswordGenerator
             }
         }
 
+        private void OnControlShowSettings(Object sender, ShowSettingsEventArgs args)
+        {
+            if (sender.GetType() == typeof(ExchangeGeneratorControl))
+            {
+                SettingsDialog.Show(this, this.settings, args.Settings);
+            }
+        }
+
         private void OnContentViewSelectedIndexChanged(Object sender, EventArgs args)
         {
             this.tssLabel.Text = String.Empty;
             this.tssValue.Text = String.Empty;
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private void SaveSettings(ExtendedSettings settings)
-        {
-            if (settings is null)
-            {
-                return;
-            }
         }
 
         #endregion

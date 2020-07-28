@@ -22,23 +22,25 @@
  * SOFTWARE.
  */
 
+using Plexdata.PasswordGenerator.Events;
+using Plexdata.PasswordGenerator.Extensions;
+using Plexdata.PasswordGenerator.Helpers;
+using Plexdata.PasswordGenerator.Interfaces;
 using Plexdata.Utilities.Password.Defines;
 using Plexdata.Utilities.Password.Entities;
 using Plexdata.Utilities.Password.Factories;
 using Plexdata.Utilities.Password.Interfaces;
-using Plexdata.PasswordGenerator.Events;
-using Plexdata.PasswordGenerator.Extensions;
-using Plexdata.PasswordGenerator.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
-
 using ScenarioModel = Plexdata.PasswordGenerator.Models.Scenario;
 
 namespace Plexdata.PasswordGenerator.Controls
 {
-    public partial class SecurityGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<ISecuritySettings>, IStatusRequester
+    public partial class SecurityGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<ISecuritySettings>, IStatusRequester, IResultWriter
     {
         #region Public Events
 
@@ -58,7 +60,24 @@ namespace Plexdata.PasswordGenerator.Controls
         {
             this.InitializeComponent();
 
+            StandardContextMenu contextMenu = StandardContextMenu.Create(this.OnContextMenuItemClick);
+            contextMenu.Opening += this.OnContextMenuOpening;
+
+            this.txtPassword.ContextMenu = null;
+            this.txtPassword.ContextMenuStrip = contextMenu;
             this.txtPassword.SetWatermark(true);
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public Boolean HasResult
+        {
+            get
+            {
+                return false;
+            }
         }
 
         #endregion
@@ -69,7 +88,7 @@ namespace Plexdata.PasswordGenerator.Controls
         {
             if (String.IsNullOrWhiteSpace(this.txtPassword.Text))
             {
-                MessageBox.Show(
+                MessageBox.Show(base.ParentForm,
                     "Provide a source password to be processed.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -94,6 +113,14 @@ namespace Plexdata.PasswordGenerator.Controls
             {
                 Duration duration = securityCalculator.Calculate(scenario, entropy);
                 this.cntDuration.SetDuration(duration);
+            }
+        }
+
+        public void WriteResult(Stream stream, Encoding encoding)
+        {
+            if (stream == null || !stream.CanWrite || encoding == null)
+            {
+                return;
             }
         }
 
@@ -192,6 +219,61 @@ namespace Plexdata.PasswordGenerator.Controls
                     this.txtGuesses.Text = scenario.Guesses.ToString("N0");
                     this.tooltip.SetToolTip(source, scenario.Text);
                 }
+            }
+        }
+
+        private void OnContextMenuOpening(Object sender, CancelEventArgs args)
+        {
+            try
+            {
+                StandardContextMenu source = StandardContextMenu.MenuFromSender(sender, out Control control);
+
+                if (source == null) { return; }
+
+                source.DisableAll();
+
+                if (control == this.txtPassword)
+                {
+                    source.Paste.Enabled = Clipboard.ContainsText();
+                    source.Clear.Enabled = this.txtPassword.Text.Length > 0;
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+        }
+
+        private void OnContextMenuItemClick(Object sender, EventArgs args)
+        {
+            try
+            {
+                ToolStripItem source = StandardContextMenu.ItemFromSender(sender, out StandardContextMenu parent);
+
+                if (source == null) { return; }
+
+                if (parent.IsPaste(source))
+                {
+                    if (parent.SourceControl == this.txtPassword && Clipboard.ContainsText())
+                    {
+                        this.txtPassword.Text = Clipboard.GetText().ClearLineEndings();
+                        this.cntEntropy.Reset();
+                        this.cntDuration.Reset();
+                    }
+                }
+                else if (parent.IsClear(source))
+                {
+                    if (parent.SourceControl == this.txtPassword)
+                    {
+                        this.txtPassword.Text = String.Empty;
+                        this.cntEntropy.Reset();
+                        this.cntDuration.Reset();
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
             }
         }
 

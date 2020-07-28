@@ -22,33 +22,16 @@
  * SOFTWARE.
  */
 
-using Plexdata.PasswordGenerator.Models;
 using System;
-using System.Drawing;
+using System.IO;
+using System.Text;
 
-namespace Plexdata.PasswordGenerator.Extensions
+namespace Plexdata.PasswordGenerator.Interfaces
 {
-    public static class DimensionExtension
+    public interface IResultWriter
     {
-        public static Size ToSize(this Dimension value)
-        {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+        Boolean HasResult { get; }
 
-            return new Size(value.Width, value.Height);
-        }
-
-        public static void FromSize(this Dimension value, Size size)
-        {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            value.Width = size.Width;
-            value.Height = size.Height;
-        }
+        void WriteResult(Stream stream, Encoding encoding);
     }
 }

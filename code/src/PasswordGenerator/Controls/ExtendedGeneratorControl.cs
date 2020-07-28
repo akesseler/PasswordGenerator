@@ -22,21 +22,23 @@
  * SOFTWARE.
  */
 
-using Plexdata.Utilities.Password.Defines;
-using Plexdata.Utilities.Password.Factories;
-using Plexdata.Utilities.Password.Interfaces;
 using Plexdata.PasswordGenerator.Events;
 using Plexdata.PasswordGenerator.Factories;
 using Plexdata.PasswordGenerator.Helpers;
 using Plexdata.PasswordGenerator.Interfaces;
+using Plexdata.Utilities.Password.Defines;
+using Plexdata.Utilities.Password.Factories;
+using Plexdata.Utilities.Password.Interfaces;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Plexdata.PasswordGenerator.Controls
 {
-    public partial class ExtendedGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<IExtendedSettings>, IStatusRequester
+    public partial class ExtendedGeneratorControl : UserControl, IGeneratorControl, IGeneratorControl<IExtendedSettings>, IStatusRequester, IResultWriter
     {
         #region Public Events
 
@@ -73,6 +75,18 @@ namespace Plexdata.PasswordGenerator.Controls
 
         #endregion
 
+        #region Public Properties
+
+        public Boolean HasResult
+        {
+            get
+            {
+                return this.lstPasswords.Items.Count > 0;
+            }
+        }
+
+        #endregion
+
         #region Public Methods
 
         public void Generate(IGeneratorSettings generatorSettings)
@@ -81,7 +95,7 @@ namespace Plexdata.PasswordGenerator.Controls
 
             if (!generatorSettings.IsValid)
             {
-                MessageBox.Show(
+                MessageBox.Show(base.ParentForm,
                     "Provide at least one of the character pools.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -95,6 +109,22 @@ namespace Plexdata.PasswordGenerator.Controls
             IExtendedGenerator generator = GeneratorFactory.Create<IExtendedGenerator>();
 
             this.lstPasswords.Items.AddRange(generator.Generate(this.controlSettings, generatorSettings).ToArray());
+        }
+
+        public void WriteResult(Stream stream, Encoding encoding)
+        {
+            if (stream == null || !stream.CanWrite || encoding == null)
+            {
+                return;
+            }
+
+            using (TextWriter writer = new StreamWriter(stream, encoding))
+            {
+                foreach (Object password in this.lstPasswords.Items)
+                {
+                    writer.WriteLine(password.ToString());
+                }
+            }
         }
 
         public void Attach(IExtendedSettings controlSettings)
@@ -163,18 +193,6 @@ namespace Plexdata.PasswordGenerator.Controls
             }
         }
 
-        private void OnResetButtonClick(Object sender, EventArgs args)
-        {
-            if (sender == this.btnLength)
-            {
-                this.controlSettings.Reset(nameof(this.controlSettings.Length));
-            }
-            else if (sender == this.btnAmount)
-            {
-                this.controlSettings.Reset(nameof(this.controlSettings.Amount));
-            }
-        }
-
         private void OnEditLengthChanged(Object sender, EventArgs args)
         {
             this.controlSettings.Length = this.numLength.Number;
@@ -202,12 +220,10 @@ namespace Plexdata.PasswordGenerator.Controls
 
                 if (control == this.numLength)
                 {
-                    source.Copy.Enabled = true;
                     source.Clear.Enabled = true;
                 }
                 else if (control == this.numAmount)
                 {
-                    source.Copy.Enabled = true;
                     source.Clear.Enabled = true;
                 }
                 else if (control == this.lstPasswords)
@@ -258,11 +274,11 @@ namespace Plexdata.PasswordGenerator.Controls
                 {
                     if (parent.SourceControl == this.numLength)
                     {
-                        this.btnLength.PerformClick();
+                        this.controlSettings.Reset(nameof(this.controlSettings.Length));
                     }
                     else if (parent.SourceControl == this.numAmount)
                     {
-                        this.btnAmount.PerformClick();
+                        this.controlSettings.Reset(nameof(this.controlSettings.Amount));
                     }
                     else if (parent.SourceControl == this.lstPasswords)
                     {
@@ -298,19 +314,19 @@ namespace Plexdata.PasswordGenerator.Controls
                     switch (this.strengthCalculator.Calculate(entropy))
                     {
                         case Strength.VeryWeak:
-                            value = $"Very Weak ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Very Weak ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.Weak:
-                            value = $"Weak ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Weak ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.Reasonable:
-                            value = $"Reasonable ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Reasonable ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.Strong:
-                            value = $"Strong ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Strong ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         case Strength.VeryStrong:
-                            value = $"Very Strong ({Math.Truncate(entropy).ToString("N0")} Bits)";
+                            value = $"Very Strong ({Math.Truncate(entropy):N0} Bits)";
                             break;
                         default:
                             return;

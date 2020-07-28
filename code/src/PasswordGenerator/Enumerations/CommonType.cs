@@ -61,6 +61,9 @@ namespace Plexdata.PasswordGenerator.Enumerations
         [Annotation("WEP-Key (256 bit)", "WEP-Key with 58 hexadecimal digits (based on a password phrase containing 29 characters).", CommonType.WepKey256Bit)]
         WepKey256Bit,
 
+        [Annotation("WEP-Key (Custom)", "WEP-Key with hexadecimal digits (based on a custom password phrase in a range of 1 up to 29 characters).", CommonType.WepKeyCustom)]
+        WepKeyCustom,
+
         [Annotation("WPA-Key", "Not supported.", CommonType.WpaKey, false)]
         WpaKey, // No rules found
 

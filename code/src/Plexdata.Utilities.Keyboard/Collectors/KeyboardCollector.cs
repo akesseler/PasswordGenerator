@@ -116,7 +116,7 @@ namespace Plexdata.Utilities.Keyboard.Collectors
                 results.Add(new KeyMap(vKey));
             }
 
-            // TODO: this.DumpResults(results);
+            this.DumpResults(results);
 
             return results;
         }
