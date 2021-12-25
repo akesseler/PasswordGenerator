@@ -40,6 +40,9 @@ namespace Plexdata.PasswordGenerator.Enumerations
         [Annotation("Internet Password 3", "Internet passwords type 3 with 14 characters (upper and lower cases, digits as well as special characters).", CommonType.InternetPassword3)]
         InternetPassword3,
 
+        [Annotation("Internet Password X", "Internet passwords with variable character length (upper and lower cases, digits as well as special characters).", CommonType.InternetPasswordX)]
+        InternetPasswordX,
+
         [Annotation("Password Manager 1", "Password manager type 1 with 16 characters.", CommonType.PasswordManager1)]
         PasswordManager1,
 

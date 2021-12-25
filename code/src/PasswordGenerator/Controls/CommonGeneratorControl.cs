@@ -111,6 +111,7 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.WepKeyCustom:
                     case CommonType.WpaKey: // No rules found
                         return false;
+                    case CommonType.InternetPasswordX:
                     case CommonType.Wpa2Key:
                         return true;
                     default:
@@ -127,6 +128,7 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.InternetPassword1:
                     case CommonType.InternetPassword2:
                     case CommonType.InternetPassword3:
+                    case CommonType.InternetPasswordX:
                     case CommonType.PasswordManager1:
                     case CommonType.PasswordManager2:
                     case CommonType.PasswordManager3:
@@ -152,6 +154,7 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.InternetPassword1:
                     case CommonType.InternetPassword2:
                     case CommonType.InternetPassword3:
+                    case CommonType.InternetPasswordX:
                     case CommonType.PasswordManager1:
                     case CommonType.PasswordManager2:
                     case CommonType.PasswordManager3:
@@ -181,6 +184,8 @@ namespace Plexdata.PasswordGenerator.Controls
                         return 10;
                     case CommonType.InternetPassword3:
                         return 14;
+                    case CommonType.InternetPasswordX:
+                        return 8;
                     case CommonType.PasswordManager1:
                         return 16;
                     case CommonType.PasswordManager2:
@@ -223,6 +228,8 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.WepKey256Bit:
                     case CommonType.WpaKey: // No rules found
                         return this.GetLengthMinimum(value);
+                    case CommonType.InternetPasswordX:
+                        return 50;
                     case CommonType.WepKeyCustom:
                         return this.GetLengthMinimum(CommonType.WepKey256Bit) / 2; // Exceptionally, it's the character count.
                     case CommonType.Wpa2Key:
@@ -250,6 +257,8 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.WepKeyCustom:
                     case CommonType.WpaKey: // No rules found
                         return this.GetLengthMinimum(value);
+                    case CommonType.InternetPasswordX:
+                        return 16;
                     case CommonType.Wpa2Key:
                         return 20; // Government recommendation
                     default:
@@ -265,6 +274,7 @@ namespace Plexdata.PasswordGenerator.Controls
                     case CommonType.InternetPassword1:
                     case CommonType.InternetPassword2:
                     case CommonType.InternetPassword3:
+                    case CommonType.InternetPasswordX:
                         return false;
                     case CommonType.PasswordManager1:
                     case CommonType.PasswordManager2:

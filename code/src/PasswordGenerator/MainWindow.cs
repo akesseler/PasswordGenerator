@@ -141,7 +141,7 @@ namespace Plexdata.PasswordGenerator
                 return;
             }
 
-            SaveFileDialog dialog = new SaveFileDialog
+            SaveFileDialog dialog = new SaveFileDialog()
             {
                 Title = "Save Passwords",
                 Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
@@ -171,6 +171,13 @@ namespace Plexdata.PasswordGenerator
 
         private void OnPlayButtonClick(Object sender, EventArgs args)
         {
+            // Some kind of quick bug fix for NumberUpDown and its value validation.
+            // When entering text into that control and pressing play button immediately afterwards,
+            // then the validating event will not occur. But to force that validation it is required
+            // to cause losing the focus on that control. Otherwise the previous value will be captured.
+            // Therefore, cause a focus change to give the control a chance to run its validation.
+            base.Focus();
+
             IGeneratorControl affected = this.tvcContent.SelectedTab.Controls[0] as IGeneratorControl;
 
             affected?.Generate(this.settings.GeneratorData);

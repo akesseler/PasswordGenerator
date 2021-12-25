@@ -73,6 +73,7 @@ namespace Plexdata.PasswordGenerator.Generators
                 case CommonType.InternetPassword1:
                 case CommonType.InternetPassword2:
                 case CommonType.InternetPassword3:
+                case CommonType.InternetPasswordX:
                     return this.GenerateInternetPasswords(settings, collector);
                 case CommonType.PasswordManager1:
                 case CommonType.PasswordManager2:
