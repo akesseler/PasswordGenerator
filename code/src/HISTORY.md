@@ -1,5 +1,9 @@
 
 
+**1.0.X**
+- Support of internet password type with a variable length.
+- Bug fixing.
+
 **1.0.1**
 - Support of custom password phrases for WEP key generation.
 - Saving generated passwords into external files.

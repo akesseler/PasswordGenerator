@@ -87,6 +87,9 @@ namespace Plexdata.PasswordGenerator.Generators
                     case CommonType.InternetPassword3:
                         this.ApplySourcesType3(collector, settings.Length, sources);
                         break;
+                    case CommonType.InternetPasswordX:
+                        this.ApplySourcesTypeX(collector, settings.Length, sources);
+                        break;
                     default:
                         throw new NotSupportedException($"Common type of \"{settings.Type}\" is not supported.");
                 }
@@ -252,6 +255,79 @@ namespace Plexdata.PasswordGenerator.Generators
             {
                 sources.Add(collector.Digits.Shuffle(this.random));
             }
+        }
+
+        private void ApplySourcesTypeX(IPoolsCollector collector, Int32 length, List<String> sources)
+        {
+            Int32[] counts = this.CalculateCounts(length);
+
+            for (Int32 index = 0; index < counts[0]; index++)
+            {
+                if (index == 0)
+                {
+                    sources.Add(collector.Consonants.Shuffle(this.random).ToUpper());
+                }
+                else if (index % 2 != 0)
+                {
+                    sources.Add(collector.Vowels.Shuffle(this.random));
+                }
+                else
+                {
+                    sources.Add(collector.Consonants.Shuffle(this.random));
+                }
+            }
+
+            for (Int32 index = 0; index < counts[1]; index++)
+            {
+                sources.Add(collector.Collect(Pools.Symbols | Pools.Operators | Pools.Punctuations | Pools.Spaces).Shuffle(this.random));
+            }
+
+            for (Int32 index = 0; index < counts[2]; index++)
+            {
+                if (index == 0)
+                {
+                    sources.Add(collector.Vowels.Shuffle(this.random).ToUpper());
+                }
+                else if (index % 2 != 0)
+                {
+                    sources.Add(collector.Consonants.Shuffle(this.random));
+                }
+                else
+                {
+                    sources.Add(collector.Vowels.Shuffle(this.random));
+                }
+            }
+
+            for (Int32 index = 0; index < counts[3]; index++)
+            {
+                sources.Add(collector.Digits.Shuffle(this.random));
+            }
+        }
+
+        private Int32[] CalculateCounts(Int32 length)
+        {
+            Int32[] result = new Int32[4];
+
+            result[0] = Convert.ToInt32(Math.Truncate(Math.Round(length * 0.35f)));
+            result[1] = Convert.ToInt32(Math.Truncate(Math.Round(length * 0.10f)));
+            result[2] = Convert.ToInt32(Math.Truncate(Math.Round(length * 0.30f)));
+            result[3] = Convert.ToInt32(Math.Truncate(Math.Round(length * 0.25f)));
+
+            Int32 difference = length - (result[0] + result[1] + result[2] + result[3]);
+
+            if (difference < 0) { result[1] += difference; }
+
+            if (difference > 0) { result[3] += difference; }
+
+            // Some cosmetic corrections for short passwords.
+            if (result[0] + result[1] + result[2] <= 6)
+            {
+                result[0] += result[1] + result[2];
+                result[1] = 0;
+                result[2] = 0;
+            }
+
+            return result;
         }
 
         [Conditional("DEBUG")]
