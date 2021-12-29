@@ -2,6 +2,7 @@
 
 **1.0.X**
 - Support of internet password type with a variable length.
+- Support of password online checks.
 - Bug fixing.
 
 **1.0.1**

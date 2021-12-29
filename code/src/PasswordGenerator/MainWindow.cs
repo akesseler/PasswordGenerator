@@ -93,6 +93,7 @@ namespace Plexdata.PasswordGenerator
             this.gusExchange.UpdateStatus += this.OnControlUpdateStatus;
             this.gusExtended.UpdateStatus += this.OnControlUpdateStatus;
             this.gusSecurity.UpdateStatus += this.OnControlUpdateStatus;
+            this.gusInspection.UpdateStatus += this.OnControlUpdateStatus;
 
             this.gusExchange.ShowSettings += this.OnControlShowSettings;
 

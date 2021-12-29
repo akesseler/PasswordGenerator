@@ -70,20 +70,23 @@ namespace Plexdata.PasswordGenerator
             this.gusCommon = new Plexdata.PasswordGenerator.Controls.CommonGeneratorControl();
             this.tbpQwerty = new System.Windows.Forms.TabPage();
             this.gusQwerty = new Plexdata.PasswordGenerator.Controls.QwertyGeneratorControl();
-            this.tbpExtended = new System.Windows.Forms.TabPage();
-            this.gusExtended = new Plexdata.PasswordGenerator.Controls.ExtendedGeneratorControl();
             this.tbpExchange = new System.Windows.Forms.TabPage();
             this.gusExchange = new Plexdata.PasswordGenerator.Controls.ExchangeGeneratorControl();
+            this.tbpExtended = new System.Windows.Forms.TabPage();
+            this.gusExtended = new Plexdata.PasswordGenerator.Controls.ExtendedGeneratorControl();
             this.tbpSecurity = new System.Windows.Forms.TabPage();
             this.gusSecurity = new Plexdata.PasswordGenerator.Controls.SecurityGeneratorControl();
+            this.tbpInspection = new System.Windows.Forms.TabPage();
+            this.gusInspection = new Plexdata.PasswordGenerator.Controls.PasswordInspectionControl();
             this.tbsMain.SuspendLayout();
             this.sbsMain.SuspendLayout();
             this.tvcContent.SuspendLayout();
             this.tbpCommon.SuspendLayout();
             this.tbpQwerty.SuspendLayout();
-            this.tbpExtended.SuspendLayout();
             this.tbpExchange.SuspendLayout();
+            this.tbpExtended.SuspendLayout();
             this.tbpSecurity.SuspendLayout();
+            this.tbpInspection.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbsMain
@@ -101,7 +104,7 @@ namespace Plexdata.PasswordGenerator
             this.tbsMain.Location = new System.Drawing.Point(0, 0);
             this.tbsMain.Name = "tbsMain";
             this.tbsMain.Padding = new System.Windows.Forms.Padding(3, 3, 4, 3);
-            this.tbsMain.Size = new System.Drawing.Size(582, 41);
+            this.tbsMain.Size = new System.Drawing.Size(484, 41);
             this.tbsMain.TabIndex = 0;
             // 
             // tbbExit
@@ -181,9 +184,9 @@ namespace Plexdata.PasswordGenerator
             this.sbsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tssLabel,
             this.tssValue});
-            this.sbsMain.Location = new System.Drawing.Point(0, 474);
+            this.sbsMain.Location = new System.Drawing.Point(0, 489);
             this.sbsMain.Name = "sbsMain";
-            this.sbsMain.Size = new System.Drawing.Size(582, 22);
+            this.sbsMain.Size = new System.Drawing.Size(484, 22);
             this.sbsMain.TabIndex = 3;
             // 
             // tssLabel
@@ -205,11 +208,12 @@ namespace Plexdata.PasswordGenerator
             this.tvcContent.Controls.Add(this.tbpExchange);
             this.tvcContent.Controls.Add(this.tbpExtended);
             this.tvcContent.Controls.Add(this.tbpSecurity);
+            this.tvcContent.Controls.Add(this.tbpInspection);
             this.tvcContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvcContent.Location = new System.Drawing.Point(0, 41);
             this.tvcContent.Name = "tvcContent";
             this.tvcContent.SelectedIndex = 0;
-            this.tvcContent.Size = new System.Drawing.Size(582, 433);
+            this.tvcContent.Size = new System.Drawing.Size(484, 448);
             this.tvcContent.TabIndex = 2;
             this.tvcContent.SelectedIndexChanged += new System.EventHandler(this.OnContentViewSelectedIndexChanged);
             // 
@@ -220,7 +224,7 @@ namespace Plexdata.PasswordGenerator
             this.tbpCommon.Margin = new System.Windows.Forms.Padding(0);
             this.tbpCommon.Name = "tbpCommon";
             this.tbpCommon.Padding = new System.Windows.Forms.Padding(5);
-            this.tbpCommon.Size = new System.Drawing.Size(574, 407);
+            this.tbpCommon.Size = new System.Drawing.Size(476, 422);
             this.tbpCommon.TabIndex = 0;
             this.tbpCommon.Text = "Common";
             this.tbpCommon.UseVisualStyleBackColor = true;
@@ -232,7 +236,7 @@ namespace Plexdata.PasswordGenerator
             this.gusCommon.Location = new System.Drawing.Point(5, 5);
             this.gusCommon.Margin = new System.Windows.Forms.Padding(0);
             this.gusCommon.Name = "gusCommon";
-            this.gusCommon.Size = new System.Drawing.Size(564, 397);
+            this.gusCommon.Size = new System.Drawing.Size(466, 412);
             this.gusCommon.TabIndex = 0;
             // 
             // tbpQwerty
@@ -242,7 +246,7 @@ namespace Plexdata.PasswordGenerator
             this.tbpQwerty.Margin = new System.Windows.Forms.Padding(0);
             this.tbpQwerty.Name = "tbpQwerty";
             this.tbpQwerty.Padding = new System.Windows.Forms.Padding(5);
-            this.tbpQwerty.Size = new System.Drawing.Size(574, 407);
+            this.tbpQwerty.Size = new System.Drawing.Size(476, 422);
             this.tbpQwerty.TabIndex = 4;
             this.tbpQwerty.Text = "Qwerty";
             this.tbpQwerty.UseVisualStyleBackColor = true;
@@ -254,32 +258,8 @@ namespace Plexdata.PasswordGenerator
             this.gusQwerty.Location = new System.Drawing.Point(5, 5);
             this.gusQwerty.Margin = new System.Windows.Forms.Padding(0);
             this.gusQwerty.Name = "gusQwerty";
-            this.gusQwerty.Size = new System.Drawing.Size(564, 397);
+            this.gusQwerty.Size = new System.Drawing.Size(466, 412);
             this.gusQwerty.TabIndex = 0;
-            // 
-            // tbpExtended
-            // 
-            this.tbpExtended.Controls.Add(this.gusExtended);
-            this.tbpExtended.Location = new System.Drawing.Point(4, 22);
-            this.tbpExtended.Margin = new System.Windows.Forms.Padding(0);
-            this.tbpExtended.Name = "tbpExtended";
-            this.tbpExtended.Padding = new System.Windows.Forms.Padding(5);
-            this.tbpExtended.Size = new System.Drawing.Size(574, 407);
-            this.tbpExtended.TabIndex = 1;
-            this.tbpExtended.Text = "Extended";
-            this.tbpExtended.UseVisualStyleBackColor = true;
-            // 
-            // gusExtended
-            // 
-            this.gusExtended.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gusExtended.BackColor = System.Drawing.Color.Transparent;
-            this.gusExtended.Location = new System.Drawing.Point(5, 5);
-            this.gusExtended.Margin = new System.Windows.Forms.Padding(0);
-            this.gusExtended.Name = "gusExtended";
-            this.gusExtended.Size = new System.Drawing.Size(564, 397);
-            this.gusExtended.TabIndex = 1;
             // 
             // tbpExchange
             // 
@@ -288,7 +268,7 @@ namespace Plexdata.PasswordGenerator
             this.tbpExchange.Margin = new System.Windows.Forms.Padding(0);
             this.tbpExchange.Name = "tbpExchange";
             this.tbpExchange.Padding = new System.Windows.Forms.Padding(5);
-            this.tbpExchange.Size = new System.Drawing.Size(574, 407);
+            this.tbpExchange.Size = new System.Drawing.Size(476, 422);
             this.tbpExchange.TabIndex = 2;
             this.tbpExchange.Text = "Exchange";
             this.tbpExchange.UseVisualStyleBackColor = true;
@@ -300,8 +280,30 @@ namespace Plexdata.PasswordGenerator
             this.gusExchange.Location = new System.Drawing.Point(5, 5);
             this.gusExchange.Margin = new System.Windows.Forms.Padding(0);
             this.gusExchange.Name = "gusExchange";
-            this.gusExchange.Size = new System.Drawing.Size(564, 397);
+            this.gusExchange.Size = new System.Drawing.Size(466, 412);
             this.gusExchange.TabIndex = 0;
+            // 
+            // tbpExtended
+            // 
+            this.tbpExtended.Controls.Add(this.gusExtended);
+            this.tbpExtended.Location = new System.Drawing.Point(4, 22);
+            this.tbpExtended.Margin = new System.Windows.Forms.Padding(0);
+            this.tbpExtended.Name = "tbpExtended";
+            this.tbpExtended.Padding = new System.Windows.Forms.Padding(5);
+            this.tbpExtended.Size = new System.Drawing.Size(476, 422);
+            this.tbpExtended.TabIndex = 1;
+            this.tbpExtended.Text = "Extended";
+            this.tbpExtended.UseVisualStyleBackColor = true;
+            // 
+            // gusExtended
+            // 
+            this.gusExtended.BackColor = System.Drawing.Color.Transparent;
+            this.gusExtended.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gusExtended.Location = new System.Drawing.Point(5, 5);
+            this.gusExtended.Margin = new System.Windows.Forms.Padding(0);
+            this.gusExtended.Name = "gusExtended";
+            this.gusExtended.Size = new System.Drawing.Size(466, 412);
+            this.gusExtended.TabIndex = 1;
             // 
             // tbpSecurity
             // 
@@ -310,7 +312,7 @@ namespace Plexdata.PasswordGenerator
             this.tbpSecurity.Margin = new System.Windows.Forms.Padding(0);
             this.tbpSecurity.Name = "tbpSecurity";
             this.tbpSecurity.Padding = new System.Windows.Forms.Padding(5);
-            this.tbpSecurity.Size = new System.Drawing.Size(574, 407);
+            this.tbpSecurity.Size = new System.Drawing.Size(476, 422);
             this.tbpSecurity.TabIndex = 3;
             this.tbpSecurity.Text = "Security";
             this.tbpSecurity.UseVisualStyleBackColor = true;
@@ -322,18 +324,40 @@ namespace Plexdata.PasswordGenerator
             this.gusSecurity.Location = new System.Drawing.Point(5, 5);
             this.gusSecurity.Margin = new System.Windows.Forms.Padding(0);
             this.gusSecurity.Name = "gusSecurity";
-            this.gusSecurity.Size = new System.Drawing.Size(564, 397);
+            this.gusSecurity.Size = new System.Drawing.Size(466, 412);
             this.gusSecurity.TabIndex = 0;
+            // 
+            // tbpInspection
+            // 
+            this.tbpInspection.Controls.Add(this.gusInspection);
+            this.tbpInspection.Location = new System.Drawing.Point(4, 22);
+            this.tbpInspection.Margin = new System.Windows.Forms.Padding(0);
+            this.tbpInspection.Name = "tbpInspection";
+            this.tbpInspection.Padding = new System.Windows.Forms.Padding(5);
+            this.tbpInspection.Size = new System.Drawing.Size(476, 422);
+            this.tbpInspection.TabIndex = 5;
+            this.tbpInspection.Text = "Inspection";
+            this.tbpInspection.UseVisualStyleBackColor = true;
+            // 
+            // gusInspection
+            // 
+            this.gusInspection.BackColor = System.Drawing.Color.Transparent;
+            this.gusInspection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gusInspection.Location = new System.Drawing.Point(5, 5);
+            this.gusInspection.Margin = new System.Windows.Forms.Padding(0);
+            this.gusInspection.Name = "gusInspection";
+            this.gusInspection.Size = new System.Drawing.Size(466, 412);
+            this.gusInspection.TabIndex = 0;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 496);
+            this.ClientSize = new System.Drawing.Size(484, 511);
             this.Controls.Add(this.tvcContent);
             this.Controls.Add(this.tbsMain);
             this.Controls.Add(this.sbsMain);
-            this.MinimumSize = new System.Drawing.Size(500, 500);
+            this.MinimumSize = new System.Drawing.Size(500, 550);
             this.Name = "MainWindow";
             this.Text = "Password Generator";
             this.tbsMain.ResumeLayout(false);
@@ -343,9 +367,10 @@ namespace Plexdata.PasswordGenerator
             this.tvcContent.ResumeLayout(false);
             this.tbpCommon.ResumeLayout(false);
             this.tbpQwerty.ResumeLayout(false);
-            this.tbpExtended.ResumeLayout(false);
             this.tbpExchange.ResumeLayout(false);
+            this.tbpExtended.ResumeLayout(false);
             this.tbpSecurity.ResumeLayout(false);
+            this.tbpInspection.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,6 +401,8 @@ namespace Plexdata.PasswordGenerator
         private System.Windows.Forms.ToolStripStatusLabel tssValue;
         private System.Windows.Forms.TabPage tbpQwerty;
         private Controls.QwertyGeneratorControl gusQwerty;
+        private System.Windows.Forms.TabPage tbpInspection;
+        private Controls.PasswordInspectionControl gusInspection;
     }
 }
 
