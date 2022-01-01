@@ -189,10 +189,20 @@ namespace Plexdata.PasswordGenerator
             SettingsDialog.Show(this, this.settings);
         }
 
-        private void OnInfoButtonClick(Object sender, EventArgs args)
+        private void OnBulbButtonClick(Object sender, EventArgs args)
+        {
+            this.tbbBulb.ShowDropDown();
+        }
+
+        private void OnMenuSummaryClick(Object sender, EventArgs args)
+        {
+            SummaryDialog dialog = new SummaryDialog();
+            dialog.ShowDialog(this);
+        }
+
+        private void OnMenuInfoClick(Object sender, EventArgs args)
         {
             InfoDialog dialog = new InfoDialog();
-
             dialog.ShowDialog(this);
         }
 

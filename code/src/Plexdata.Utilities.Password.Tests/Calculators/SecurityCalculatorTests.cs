@@ -36,15 +36,6 @@ namespace Plexdata.Utilities.Password.Tests.Calculators
     public class SecurityCalculatorTests
     {
         [Test]
-        public void Generate_SimpleGeneration_ResultContainsData()
-        {
-            String actual = this.GetInstance().Generate();
-
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.Not.Empty);
-        }
-
-        [Test]
         public void Calculate_ScenarioIsNull_ThrowsArgumentNullException()
         {
             Assert.That(() => this.GetInstance().Calculate(null, 42), Throws.ArgumentNullException);

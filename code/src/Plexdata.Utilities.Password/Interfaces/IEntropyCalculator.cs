@@ -27,7 +27,7 @@ using System;
 namespace Plexdata.Utilities.Password.Interfaces
 {
     // TODO: Finalize documentation.
-    public interface IEntropyCalculator : ICalculatorSummary<String>
+    public interface IEntropyCalculator
     {
         Double Calculate(String password);
     }

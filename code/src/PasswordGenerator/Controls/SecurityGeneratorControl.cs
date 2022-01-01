@@ -107,7 +107,7 @@ namespace Plexdata.PasswordGenerator.Controls
             this.cntEntropy.Strength = strength;
             this.cntEntropy.Entropy = entropy;
             this.cntEntropy.Percent = strengthCalculator.ToPercent(entropy);
-            this.cntEntropy.Summary = strengthCalculator.Generate(strength);
+            this.cntEntropy.Summary = strengthCalculator.ToSummary(strength);
 
             if (entropy > 0d)
             {

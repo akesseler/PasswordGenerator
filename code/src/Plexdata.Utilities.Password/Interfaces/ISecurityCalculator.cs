@@ -28,7 +28,7 @@ using System;
 namespace Plexdata.Utilities.Password.Interfaces
 {
     // TODO: Finalize documentation.
-    public interface ISecurityCalculator : ICalculatorSummary<String>
+    public interface ISecurityCalculator
     {
         Duration Calculate(Scenario scenario, Double entropy);
     }

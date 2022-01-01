@@ -36,15 +36,6 @@ namespace Plexdata.Utilities.Password.Tests.Calculators
     public class StrengthCalculatorTests
     {
         [Test]
-        public void Generate_SimpleGeneration_ResultContainsData()
-        {
-            String actual = this.GetInstance().Generate();
-
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.Not.Empty);
-        }
-
-        [Test]
         public void Calculate_EntropyIsNaN_ThrowsArgumentOutOfRangeException()
         {
             Assert.That(() => this.GetInstance().Calculate(Double.NaN), Throws.InstanceOf<ArgumentOutOfRangeException>());

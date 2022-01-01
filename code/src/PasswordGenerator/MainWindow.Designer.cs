@@ -60,7 +60,9 @@ namespace Plexdata.PasswordGenerator
             this.tbbPlay = new System.Windows.Forms.ToolStripButton();
             this.tssMain2 = new System.Windows.Forms.ToolStripSeparator();
             this.tbbSettings = new System.Windows.Forms.ToolStripButton();
-            this.tbbInfo = new System.Windows.Forms.ToolStripButton();
+            this.tbbBulb = new System.Windows.Forms.ToolStripSplitButton();
+            this.tbmSummary = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbmInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.tipMain = new System.Windows.Forms.ToolTip(this.components);
             this.sbsMain = new System.Windows.Forms.StatusStrip();
             this.tssLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -100,7 +102,7 @@ namespace Plexdata.PasswordGenerator
             this.tbbPlay,
             this.tssMain2,
             this.tbbSettings,
-            this.tbbInfo});
+            this.tbbBulb});
             this.tbsMain.Location = new System.Drawing.Point(0, 0);
             this.tbsMain.Name = "tbsMain";
             this.tbsMain.Padding = new System.Windows.Forms.Padding(3, 3, 4, 3);
@@ -167,17 +169,38 @@ namespace Plexdata.PasswordGenerator
             this.tbbSettings.ToolTipText = "Show settings dialog.";
             this.tbbSettings.Click += new System.EventHandler(this.OnSettingsButtonClick);
             // 
-            // tbbInfo
+            // tbbBulb
             // 
-            this.tbbInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbbInfo.Image = global::Plexdata.PasswordGenerator.Properties.Resources.info_28x28;
-            this.tbbInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbbInfo.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
-            this.tbbInfo.Name = "tbbInfo";
-            this.tbbInfo.Size = new System.Drawing.Size(32, 32);
-            this.tbbInfo.Text = "Info";
-            this.tbbInfo.ToolTipText = "Show info box with some program details.";
-            this.tbbInfo.Click += new System.EventHandler(this.OnInfoButtonClick);
+            this.tbbBulb.AutoToolTip = false;
+            this.tbbBulb.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbbBulb.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tbmSummary,
+            this.tbmInfo});
+            this.tbbBulb.Image = global::Plexdata.PasswordGenerator.Properties.Resources.bulb_28x28;
+            this.tbbBulb.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbbBulb.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
+            this.tbbBulb.Name = "tbbBulb";
+            this.tbbBulb.Size = new System.Drawing.Size(44, 32);
+            this.tbbBulb.Text = "Bulb";
+            this.tbbBulb.ButtonClick += new System.EventHandler(this.OnBulbButtonClick);
+            // 
+            // tbmSummary
+            // 
+            this.tbmSummary.Image = global::Plexdata.PasswordGenerator.Properties.Resources.help_16x16;
+            this.tbmSummary.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tbmSummary.Name = "tbmSummary";
+            this.tbmSummary.Size = new System.Drawing.Size(180, 22);
+            this.tbmSummary.Text = "Summary...";
+            this.tbmSummary.Click += new System.EventHandler(this.OnMenuSummaryClick);
+            // 
+            // tbmInfo
+            // 
+            this.tbmInfo.Image = global::Plexdata.PasswordGenerator.Properties.Resources.info_16x16;
+            this.tbmInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tbmInfo.Name = "tbmInfo";
+            this.tbmInfo.Size = new System.Drawing.Size(180, 22);
+            this.tbmInfo.Text = "Info...";
+            this.tbmInfo.Click += new System.EventHandler(this.OnMenuInfoClick);
             // 
             // sbsMain
             // 
@@ -380,7 +403,6 @@ namespace Plexdata.PasswordGenerator
 
         private System.Windows.Forms.ToolStrip tbsMain;
         private System.Windows.Forms.ToolStripButton tbbExit;
-        private System.Windows.Forms.ToolStripButton tbbInfo;
         private System.Windows.Forms.ToolStripSeparator tssMain1;
         private System.Windows.Forms.ToolStripButton tbbSave;
         private System.Windows.Forms.ToolStripButton tbbPlay;
@@ -403,6 +425,9 @@ namespace Plexdata.PasswordGenerator
         private Controls.QwertyGeneratorControl gusQwerty;
         private System.Windows.Forms.TabPage tbpInspection;
         private Controls.PasswordInspectionControl gusInspection;
+        private System.Windows.Forms.ToolStripSplitButton tbbBulb;
+        private System.Windows.Forms.ToolStripMenuItem tbmInfo;
+        private System.Windows.Forms.ToolStripMenuItem tbmSummary;
     }
 }
 
