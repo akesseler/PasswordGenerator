@@ -65,22 +65,6 @@ namespace Plexdata.Utilities.Password.Calculators
 
         #region Public Methods
 
-        public String Generate()
-        {
-            return
-                "The entropy of each pool is nothing else but its length. If a password contains " +
-                "at least one character of one of the pools then its entropy is the length of the " +
-                "fitting pool. The total password entropy is made of the sum of entropies of each " +
-                "of the included pools. Finally, the calculation rule of the password entropy is " +
-                "either \"E = log2(R ^ L)\" or \"E = log2(R) * L\" with E = password entropy, R = pool " +
-                "of unique characters, L = number of charactes in the password (password length). For " +
-                "the source of the above conclusion see those links: " +
-                "https://www.pleacher.com/mp/mlessons/algebra/entropy.html, " +
-                "https://ritcyberselfdefense.wordpress.com/2011/09/24/how-to-calculate-password-entropy/ " +
-                "Final note about usage of \"Diceware Words List\" as well as of \"English Dictionary " +
-                "Words\". Both were intentionally not taken into account.";
-        }
-
         public Double Calculate(String password)
         {
             if (String.IsNullOrEmpty(password))

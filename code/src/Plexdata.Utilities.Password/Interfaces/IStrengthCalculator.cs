@@ -28,12 +28,14 @@ using System;
 namespace Plexdata.Utilities.Password.Interfaces
 {
     // TODO: Finalize documentation.
-    public interface IStrengthCalculator : ICalculatorSummary<String>, ICalculatorSummary<Strength, String>
+    public interface IStrengthCalculator
     {
         Boolean IsReinforced { get; set; }
 
         Strength Calculate(Double entropy);
 
         Double ToPercent(Double entropy);
+
+        String ToSummary(Strength strength);
     }
 }

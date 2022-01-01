@@ -3,6 +3,8 @@
 **1.0.X**
 - Support of internet password type with a variable length.
 - Support of password online checks.
+- Support of an additional summary window.
+- YAGNI code removed.
 - Bug fixing.
 
 **1.0.1**

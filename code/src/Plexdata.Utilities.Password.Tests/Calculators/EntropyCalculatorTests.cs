@@ -40,15 +40,6 @@ namespace Plexdata.Utilities.Password.Tests.Calculators
             Assert.That(() => new EntropyCalculator(null), Throws.ArgumentNullException);
         }
 
-        [Test]
-        public void Generate_SimpleGeneration_ResultContainsData()
-        {
-            String actual = this.GetInstance().Generate();
-
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.Not.Empty);
-        }
-
         [TestCase(null)]
         [TestCase("")]
         public void Calculate_ValueIsInvalid_ResultIsZero(String value)

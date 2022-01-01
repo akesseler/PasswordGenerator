@@ -48,17 +48,6 @@ namespace Plexdata.Utilities.Password.Calculators
 
         #region Public Methods
 
-        public String Generate()
-        {
-            return
-                "According to (see link below) a particular password might be cracked in \"<n> seconds\". " +
-                "These \"seconds\" are defined by mathematical formula: T = (2^(log2(R)*L))/G which is " +
-                "equivalent to T = (2^E)/G with E = password entropy, R = pool of unique characters, " +
-                "L = number of characters in the password (password length), G = number of guesses per " +
-                "second a computer can make (e.g. 2800000000 guesses per seconds). " +
-                "https://ritcyberselfdefense.wordpress.com/2011/09/24/how-to-calculate-password-entropy/ ";
-        }
-
         public Duration Calculate(Scenario scenario, Double entropy)
         {
             if (scenario == null)

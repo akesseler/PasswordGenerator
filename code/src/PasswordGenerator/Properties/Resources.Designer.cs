@@ -83,6 +83,26 @@ namespace Plexdata.PasswordGenerator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bulb_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("bulb_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bulb_28x28 {
+            get {
+                object obj = ResourceManager.GetObject("bulb_28x28", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap edit_16x16 {
             get {
                 object obj = ResourceManager.GetObject("edit_16x16", resourceCulture);
@@ -116,6 +136,26 @@ namespace Plexdata.PasswordGenerator.Properties {
         internal static System.Drawing.Bitmap exit_28x28 {
             get {
                 object obj = ResourceManager.GetObject("exit_28x28", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap help_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("help_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap help_28x28 {
+            get {
+                object obj = ResourceManager.GetObject("help_28x28", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

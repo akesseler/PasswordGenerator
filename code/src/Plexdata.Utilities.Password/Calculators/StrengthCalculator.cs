@@ -80,38 +80,6 @@ namespace Plexdata.Utilities.Password.Calculators
 
         #region Public Methods
 
-        public String Generate()
-        {
-            return
-                $"A password strength could be determined by these characteristics: " +
-                $"Less than {this.limits[Strength.VeryWeak].Maximum} bits: very weak, might keep out family members; " +
-                $"From {this.limits[Strength.Weak].Minimum} up to {this.limits[Strength.Weak].Maximum} bits: weak, should keep out most people, often good for desktop login passwords; " +
-                $"From {this.limits[Strength.Reasonable].Minimum} up to {this.limits[Strength.Reasonable].Maximum} bits: reasonable, fairly secure passwords for network and company passwords; " +
-                $"From {this.limits[Strength.Strong].Minimum} up to {this.limits[Strength.Strong].Maximum} bits: strong, can be good for guarding financial information; " +
-                $"Equal to or greater than {this.limits[Strength.VeryStrong].Minimum} bits: very strong, often considered as overkill. ";
-        }
-
-        public String Generate(Strength option)
-        {
-            switch (option)
-            {
-                case Strength.Unknown:
-                    return "Entropy range is unknown yet.";
-                case Strength.VeryWeak:
-                    return $"Entropy range less than {this.limits[option].Maximum} bits, which is very weak. It might keep out family members.";
-                case Strength.Weak:
-                    return $"Entropy range from {this.limits[option].Minimum} up to {this.limits[option].Maximum} bits, which is weak. It should keep out most people, often good for desktop login passwords.";
-                case Strength.Reasonable:
-                    return $"Entropy range from {this.limits[option].Minimum} up to {this.limits[option].Maximum} bits, which is reasonable. It fairly secures passwords for network and company passwords.";
-                case Strength.Strong:
-                    return $"Entropy range from {this.limits[option].Minimum} up to {this.limits[option].Maximum} bits, which is strong. It could be good for guarding financial information.";
-                case Strength.VeryStrong:
-                    return $"Entropy range is equal to or greater than {this.limits[option].Minimum} bits, which is very strong. It is often considered as overkill.";
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-
         public Strength Calculate(Double entropy)
         {
             if (Double.IsNaN(entropy))
@@ -156,6 +124,27 @@ namespace Plexdata.Utilities.Password.Calculators
             }
 
             return (entropy * 100d) / (maximum - minimum);
+        }
+
+        public String ToSummary(Strength strength)
+        {
+            switch (strength)
+            {
+                case Strength.Unknown:
+                    return "Entropy range is unknown yet.";
+                case Strength.VeryWeak:
+                    return $"Entropy range less than {this.limits[strength].Maximum} bits, which is very weak. It might keep out family members.";
+                case Strength.Weak:
+                    return $"Entropy range from {this.limits[strength].Minimum} up to {this.limits[strength].Maximum} bits, which is weak. It should keep out most people, often good for desktop login passwords.";
+                case Strength.Reasonable:
+                    return $"Entropy range from {this.limits[strength].Minimum} up to {this.limits[strength].Maximum} bits, which is reasonable. It fairly secures passwords for network and company passwords.";
+                case Strength.Strong:
+                    return $"Entropy range from {this.limits[strength].Minimum} up to {this.limits[strength].Maximum} bits, which is strong. It could be good for guarding financial information.";
+                case Strength.VeryStrong:
+                    return $"Entropy range is equal to or greater than {this.limits[strength].Minimum} bits, which is very strong. It is often considered as overkill.";
+                default:
+                    throw new NotSupportedException();
+            }
         }
 
         #endregion
